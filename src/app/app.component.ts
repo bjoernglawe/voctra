@@ -18,7 +18,7 @@ export class AppComponent {
 
   initTranslate() {
     // Set the default language for translation strings, and the current language.
-    this.translate.setDefaultLang('en');
+    this.translate.setDefaultLang('de');
     const browserLang = this.translate.getBrowserLang();
 
     if (browserLang) {
@@ -34,7 +34,7 @@ export class AppComponent {
         this.translate.use(this.translate.getBrowserLang());
       }
     } else {
-      this.translate.use('en'); // Set your language here
+      this.translate.use('de'); // Set your language here
     }
   }
 }
