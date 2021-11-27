@@ -9,6 +9,10 @@ const routes: Routes = [
   {
     path: 'vocab-test',
     loadChildren: () => import('./pages/vocab-test/vocab-test.module').then(m => m.VocabTestPageModule)
+  },
+  {
+    path: 'add-vocab',
+    loadChildren: () => import('./pages/add-vocab/add-vocab.module').then(m => m.AddVocabPageModule)
   }
 ];
 @NgModule({

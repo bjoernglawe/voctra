@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
   private _storage: Storage | null = null;
+
+  private storageInitSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(
     private storage: Storage,
@@ -16,7 +20,14 @@ export class StorageService {
   async init() {
     const storage = await this.storage.create();
     this._storage = storage;
+    this.storageInitSubject.next(true);
   }
+
+  public getReadyInitSubject(): BehaviorSubject<boolean> {
+    return this.storageInitSubject;
+  }
+
+  // ---- WORK WITH STORAGE ---- //
 
   public set(key: string, value: any): void {
     this._storage.set(key, value);

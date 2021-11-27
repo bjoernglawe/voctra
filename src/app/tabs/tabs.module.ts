@@ -16,7 +16,7 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     RouterModule,
     TabsPageRoutingModule,
-    TranslateModule.forRoot(),
+    TranslateModule.forChild(),
   ],
   declarations: [TabsPage],
   providers: []

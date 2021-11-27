@@ -3,12 +3,15 @@ import { environment } from 'src/environments/environment';
 import { E_VocabCard, E_VocabCollection } from 'src/models/vocabulary.model';
 import { StorageService } from './storage.service';
 import { v4 as uuidv4 } from 'uuid';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VocabManagerService {
   private _vocabStorage: E_VocabCollection[] = [];
+  private ngUnsubcribe: Subject<void> = new Subject();
 
   constructor(
     private storageService: StorageService,
@@ -17,11 +20,25 @@ export class VocabManagerService {
   }
 
   private init(): void {
-    this.storageService.get(environment.vocabStorageKey).then((value: any) => {
-      if (value) {
-        this._vocabStorage = value;
-      }
-    });
+    const unsubStorage: Subject<void> = new Subject();
+
+    this.storageService.getReadyInitSubject()
+      .pipe(takeUntil(this.ngUnsubcribe), takeUntil(unsubStorage))
+      .subscribe((value) => {
+        if (value) {
+          this.storageService.keys().then((keys: string[]) => {
+            let index = keys.findIndex(key => key == environment.vocabStorageKey);
+            if (index >= 0) {
+              this.storageService.get(environment.vocabStorageKey).then((value: any) => {
+                if (value) {
+                  this._vocabStorage = value;
+                }
+              });
+            }
+            unsubStorage.next();
+          })
+        }
+      })
   }
 
   public getAllVocabulary(): E_VocabCollection[] {

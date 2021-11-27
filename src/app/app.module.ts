@@ -8,6 +8,7 @@ import { IonicStorageModule } from '@ionic/storage-angular';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { StorageService } from 'src/services/storage.service';
+import { VocabManagerService } from 'src/services/vocab-manager.service';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routes';
 
@@ -43,6 +44,7 @@ export function createTranslateLoader(http: HttpClient) {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     StorageService,
+    VocabManagerService,
   ],
   bootstrap: [
     AppComponent,

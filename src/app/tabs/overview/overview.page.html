@@ -12,4 +12,10 @@
       <ion-title size="large">{{ 'OVERVIEW' | translate }}</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="['/add-vocab']" routerLinkActive="router-link-active">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

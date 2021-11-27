@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-tab2',
+  selector: 'vocab-test-page',
   templateUrl: 'vocab-test.page.html',
   styleUrls: ['vocab-test.page.scss']
 })
