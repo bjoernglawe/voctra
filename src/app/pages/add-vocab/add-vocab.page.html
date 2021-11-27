@@ -16,5 +16,73 @@
     </ion-toolbar>
   </ion-header>
 
-  
+
+  <form [formGroup]="vocabFormGroup">
+    <ion-list>
+      <ion-item>
+        <ion-label>{{ "VOCAB_COLLECTION" | translate }}</ion-label>
+        <ion-select formControlName="collection" multiple="false" cancelText="{{ 'CANCEL' | translate }}"
+          okText="{{ 'OKAY' | translate }}">
+          <ion-select-option value="new">{{ 'CREATE_NEW_COLLECTION' | translate }}</ion-select-option>
+          <ion-select-option *ngFor="let collection of vocabCollections" value="{{ collection.id }}"> {{
+            collection.title }} </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <label *ngIf="vocabFormGroup.get('collection').touched && vocabFormGroup.get('collection').errors?.['required']"
+        class="input-error-label">Auswahl einer Collection oder neu erstellen ist notwendig </label>
+      <!-- new Collection -->
+      <ng-container *ngIf="vocabFormGroup.get('collection').value == 'new'">
+        <ion-item>
+          <ion-label position="floating">Titel</ion-label>
+          <ion-input formControlName="collTitle" placeholder="Titel"></ion-input>
+        </ion-item>
+        <label *ngIf="vocabFormGroup.get('collTitle').touched && vocabFormGroup.get('collTitle').errors?.['required']"
+          class="input-error-label"> Titel ist notwendig </label>
+        <ion-item>
+          <ion-label position="floating">Sprache</ion-label>
+          <ion-input formControlName="collLanguage" placeholder="Sprache"></ion-input>
+        </ion-item>
+        <label
+          *ngIf="vocabFormGroup.get('collLanguage').touched && vocabFormGroup.get('collLanguage').errors?.['required']"
+          class="input-error-label"> Sprache ist notwendig </label>
+        <ion-item>
+          <ion-label position="floating">Übersetze Sprache</ion-label>
+          <ion-input formControlName="collTranslateLang" placeholder="Übersetzte Sprache"></ion-input>
+        </ion-item>
+        <label
+          *ngIf="vocabFormGroup.get('collTranslateLang').touched && vocabFormGroup.get('collTranslateLang').errors?.['required']"
+          class="input-error-label"> Übersetzte Sprache ist notwendig </label>
+        <ion-item>
+          <ion-label position="floating">Beschreibung</ion-label>
+          <ion-input formControlName="collDescription" placeholder="Beschreibung"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Farbe</ion-label>
+          <ion-input formControlName="collColor" placeholder="#123456"></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-button color="success" size="default" (click)="saveNewCollection()">
+            Speichern
+            <ion-icon name="checkmark-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ng-container>
+    </ion-list>
+
+    <!-- new Vocabulary -->
+    <ion-card>
+      <ion-card-content>
+        <ion-input class="voc-word-input" formControlName="vocWord" placeholder="Wort"></ion-input>
+        <ion-input class="voc-pron-input" formControlName="vocPron" placeholder="Aussprache"></ion-input>
+        <ion-input class="voc-trans-input" formControlName="vocTrans" placeholder="Übersetzung"></ion-input>
+        <ion-textarea class="voc-desc-input" formControlName="vocDesc" type="textarea" placeholder="Beschreibung"></ion-textarea>
+        <ion-item lines="none">
+          <ion-button color="success" size="default" (click)="saveNewVocCard()">
+            Speichern
+            <ion-icon name="checkmark-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </form>
 </ion-content>

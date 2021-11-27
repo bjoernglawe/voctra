@@ -11,19 +11,25 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class VocabManagerService {
   private _vocabStorage: E_VocabCollection[] = [];
-  private ngUnsubcribe: Subject<void> = new Subject();
+  private ngUnsubscribe: Subject<void> = new Subject();
+  private vocabularSubject: Subject<E_VocabCollection[]> = new Subject();
 
   constructor(
     private storageService: StorageService,
   ) {
-    this.init();
+    this.loadVocabulary();
   }
 
-  private init(): void {
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
+  public loadVocabulary(): void {
     const unsubStorage: Subject<void> = new Subject();
 
     this.storageService.getReadyInitSubject()
-      .pipe(takeUntil(this.ngUnsubcribe), takeUntil(unsubStorage))
+      .pipe(takeUntil(this.ngUnsubscribe), takeUntil(unsubStorage))
       .subscribe((value) => {
         if (value) {
           this.storageService.keys().then((keys: string[]) => {
@@ -31,9 +37,11 @@ export class VocabManagerService {
             if (index >= 0) {
               this.storageService.get(environment.vocabStorageKey).then((value: any) => {
                 if (value) {
-                  this._vocabStorage = value;
+                  this.setVocabulary(value);
                 }
               });
+            } else {
+              this.setVocabulary([]);
             }
             unsubStorage.next();
           })
@@ -41,12 +49,18 @@ export class VocabManagerService {
       })
   }
 
-  public getAllVocabulary(): E_VocabCollection[] {
-    return this._vocabStorage;
+  public getAllVocabulary(): Subject<E_VocabCollection[]> {
+    return this.vocabularSubject;
+  }
+
+  private setVocabulary(collections: E_VocabCollection[]): void {
+    this._vocabStorage = collections;
+    this.vocabularSubject.next(this._vocabStorage);
   }
 
   public saveVocabulary(): void {
     this.storageService.set(environment.vocabStorageKey, this._vocabStorage);
+    this.loadVocabulary();
   }
 
   public createVocabCollection(

@@ -3,5 +3,9 @@
   "VOCABULARY": "Vokabeln",
   "TRAINING": "Training",
   "BACK_BUTTON_TEXT": "Zurück",
-  "ADD_VOCABULARY": "Vokabeln hinzufügen"
+  "ADD_VOCABULARY": "Vokabeln hinzufügen",
+  "VOCAB_COLLECTION": "Vokabelsammlung",
+  "CANCEL": "Abbruch",
+  "OKAY": "Okay",
+  "CREATE_NEW_COLLECTION": "Neue Sammlung erstellen"
 }

@@ -9,7 +9,6 @@ import { VocabTestPageRoutingModule } from './vocab-test.routes';
 @NgModule({
   imports: [
     IonicModule,
-    CommonModule,
     FormsModule,
     SharedModule,
     VocabTestPageRoutingModule
