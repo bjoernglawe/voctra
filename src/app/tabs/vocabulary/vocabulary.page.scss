@@ -1,0 +1,20 @@
+.vocab-item-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    flex-wrap: wrap;
+    width: 100%;
+    .vocab-word {
+    }
+    .vocab-translation {
+    }
+    .vocab-pronunciation {
+        font-size: 14px;
+        opacity: 0.5;
+        grid-column: span 2;
+    }
+    .vocab-description {
+        font-size: 14px;
+        opacity: 0.9;
+        grid-column: span 2;
+    }
+}

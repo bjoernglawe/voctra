@@ -19,4 +19,4 @@ import { VocabularyPageRoutingModule } from './vocabulary.routes';
   ],
   declarations: [VocabularyPage]
 })
-export class VocabularyPageModule {}
+export class VocabularyPageModule { }

@@ -70,19 +70,23 @@
     </ion-list>
 
     <!-- new Vocabulary -->
-    <ion-card>
-      <ion-card-content>
-        <ion-input class="voc-word-input" formControlName="vocWord" placeholder="Wort"></ion-input>
-        <ion-input class="voc-pron-input" formControlName="vocPron" placeholder="Aussprache"></ion-input>
-        <ion-input class="voc-trans-input" formControlName="vocTrans" placeholder="Übersetzung"></ion-input>
-        <ion-textarea class="voc-desc-input" formControlName="vocDesc" type="textarea" placeholder="Beschreibung"></ion-textarea>
-        <ion-item lines="none">
-          <ion-button color="success" size="default" (click)="saveNewVocCard()">
-            Speichern
-            <ion-icon name="checkmark-outline"></ion-icon>
-          </ion-button>
-        </ion-item>
-      </ion-card-content>
-    </ion-card>
+
+    <ng-container *ngIf="vocabFormGroup.get('collection').value != 'new'">
+      <ion-card>
+        <ion-card-content>
+          <ion-input class="voc-word-input" formControlName="vocWord" placeholder="Wort"></ion-input>
+          <ion-input class="voc-pron-input" formControlName="vocPron" placeholder="Aussprache"></ion-input>
+          <ion-input class="voc-trans-input" formControlName="vocTrans" placeholder="Übersetzung"></ion-input>
+          <ion-textarea class="voc-desc-input" formControlName="vocDesc" type="textarea" placeholder="Beschreibung">
+          </ion-textarea>
+          <ion-item lines="none">
+            <ion-button color="success" size="default" (click)="saveNewVocCard()">
+              Speichern
+              <ion-icon name="checkmark-outline"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
   </form>
 </ion-content>

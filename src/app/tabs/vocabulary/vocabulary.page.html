@@ -1,8 +1,21 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons *ngIf="showVocList" slot="start">
+      <ion-button (click)="showVocList = false">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
     <ion-title>
       {{ 'VOCABULARY' | translate }}
     </ion-title>
+
+    <ion-buttons slot="primary">
+      <ion-button (click)="showVocMore = !showVocMore">
+        <ion-icon slot="icon-only" *ngIf="!showVocMore" name="eye-outline"></ion-icon>
+        <ion-icon slot="icon-only" *ngIf="showVocMore" name="eye-off-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -12,4 +25,42 @@
       <ion-title size="large">{{ 'VOCABULARY' | translate }}</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ng-container *ngIf="!showVocList">
+    <ng-container *ngFor="let collection of collections">
+      <ion-card [style]="{'background-color': collection.color}" (click)="selectCollection(collection)"
+        class="ion-activatable ripple-parent">
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-card-header>
+          <ion-card-subtitle>{{ collection.language }}</ion-card-subtitle>
+          <ion-card-title>{{ collection.title }}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          {{ collection.description }}
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+  </ng-container>
+
+
+  <ion-list *ngIf="showVocList && selectedCollection">
+    <ng-container *ngFor="let vocCard of selectedCollection.vocabulary">
+      <ion-item matRipple class="ion-activatable ripple-parent">
+        <ion-ripple-effect></ion-ripple-effect>
+        <div class="vocab-item-grid">
+          <div class="vocab-word">{{vocCard.word}}</div>
+          <div class="vocab-translation">{{vocCard.translation}}</div>
+          <div class="vocab-pronunciation" *ngIf="showVocMore">{{vocCard.pronunciation}}</div>
+          <div class="vocab-description" *ngIf="showVocMore">{{vocCard.description}}</div>
+        </div>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="['/add-vocab']" routerLinkActive="router-link-active">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

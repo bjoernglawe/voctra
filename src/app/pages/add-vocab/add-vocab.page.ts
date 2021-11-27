@@ -36,10 +36,12 @@ export class AddVocabPage {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((collections: E_VocabCollection[]) => {
         this.vocabCollections = collections;
-        if (collections.length <= 0) {
-          this.vocabFormGroup.get('collection').setValue("new");
-        } else {
-          this.vocabFormGroup.get('collection').setValue(collections[collections.length - 1].id);
+        if (!this.vocabFormGroup.get('collection').value) {
+          if (collections.length <= 0) {
+            this.vocabFormGroup.get('collection').setValue("new");
+          } else {
+            this.vocabFormGroup.get('collection').setValue(collections[collections.length - 1].id);
+          }
         }
       })
     this.vocabService.loadVocabulary();
@@ -68,14 +70,14 @@ export class AddVocabPage {
     const collColor = this.vocabFormGroup.get('collColor').value;
 
     this.vocabService.createVocabCollection(collTitle, collLanguage, collTranslateLang, collDescription, collColor);
-    
+
     this.vocabFormGroup.get('collTitle').setValue(undefined);
     this.vocabFormGroup.get('collLanguage').setValue(undefined);
     this.vocabFormGroup.get('collTranslateLang').setValue(undefined);
     this.vocabFormGroup.get('collDescription').setValue(undefined);
     this.vocabFormGroup.get('collColor').setValue(undefined);
   }
-  
+
   public saveNewVocCard() {
     if (this.vocabFormGroup.get('collection').value == 'new') {
       return;
@@ -93,7 +95,7 @@ export class AddVocabPage {
     const vocDesc = this.vocabFormGroup.get('vocDesc').value;
 
     this.vocabService.createVocabCard(collection, vocWord, vocTrans, vocPron, vocDesc);
-    
+
     this.vocabFormGroup.get('vocWord').setValue(undefined);
     this.vocabFormGroup.get('vocTrans').setValue(undefined);
     this.vocabFormGroup.get('vocPron').setValue(undefined);
