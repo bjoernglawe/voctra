@@ -2,12 +2,11 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab1Page } from './tab1.page';
-import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
+import { OverviewPage } from './overview.page';
 
-import { Tab1PageRoutingModule } from './tab1-routing.module';
+import { OverviewPageRoutingModule } from './overview-routing.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { createTranslateLoader } from '../app.module';
+import { createTranslateLoader } from '../../app.module';
 import { HttpClient } from '@angular/common/http';
 
 @NgModule({
@@ -15,8 +14,7 @@ import { HttpClient } from '@angular/common/http';
     IonicModule,
     CommonModule,
     FormsModule,
-    ExploreContainerComponentModule,
-    Tab1PageRoutingModule,
+    OverviewPageRoutingModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
@@ -26,6 +24,6 @@ import { HttpClient } from '@angular/common/http';
       defaultLanguage: 'en'
     })
   ],
-  declarations: [Tab1Page]
+  declarations: [OverviewPage]
 })
 export class Tab1PageModule { }
