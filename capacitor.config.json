@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "voctra",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

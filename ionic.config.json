@@ -1,0 +1,7 @@
+{
+  "name": "voctra",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
