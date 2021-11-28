@@ -11,6 +11,8 @@ import { StorageService } from 'src/services/storage.service';
 import { VocabManagerService } from 'src/services/vocab-manager.service';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routes';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -39,6 +41,12 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     IonicModule.forRoot(),
     AppRoutingModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

@@ -57,10 +57,7 @@ export class VocabTestPage {
         this.vocabulary.forEach(collection => {
           this.vocabCards = this.vocabCards.concat(collection.vocabulary);
         });
-        console.log(this.vocabCards);
       });
-    console.log({ 'grid-template-columns': 'repeat(' + this.settings.rowSize + ', 1fr)' });
-
   }
 
   ngOnInit() {
@@ -75,8 +72,6 @@ export class VocabTestPage {
   public selectNextCard() {
     const max = this.vocabCards.length;
     const ranIndex = Math.round(Math.random() * (max - 1));
-    console.log(ranIndex);
-
     this.currentCard = this.vocabCards[ranIndex];
     this.setCardContent();
   }
