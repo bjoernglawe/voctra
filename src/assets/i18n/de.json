@@ -7,5 +7,21 @@
   "VOCAB_COLLECTION": "Vokabelsammlung",
   "CANCEL": "Abbruch",
   "OKAY": "Okay",
-  "CREATE_NEW_COLLECTION": "Neue Sammlung erstellen"
+  "CREATE_NEW_COLLECTION": "Neue Sammlung erstellen",
+  "SELECT_COLLECTION_REQUIRED": "Auswahl von Vokabelsammlung ist notwendig!",
+  "TITLE": "Titel",
+  "COLLECTION_TITLE_REQUIRED": "Titel ist notwendig!",
+  "LANGUAGE": "Sprache",
+  "COLLECTION_LANGUAGE_REQUIRED": "Sprache ist notwendig!",
+  "TRANSLATE_LANGUAGE": "Übersetzungssprache",
+  "COLLECTION_TRANSLATE_LANGUAGE_REQUIRED": "Übersetzungssprache ist notwendig!",
+  "COLLECTION_DESCRIPTION": "Beschreibung",
+  "COLLECTION_COLOR": "Farbe",
+  "SAVE": "Speichern",
+  "WORD": "Wort",
+  "PRONUNCIATION": "Aussprache",
+  "TRANSLATION": "Übersetzung",
+  "DESCRIPTION": "Beschreibung",
+  "DELETE": "Löschen",
+  "DOWNLOAD_COLLECTION": "Herunterladen"
 }

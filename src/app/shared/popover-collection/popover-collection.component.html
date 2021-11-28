@@ -1,0 +1,13 @@
+<ion-list>
+    <ion-list-header>
+        {{collection.title}}
+    </ion-list-header>
+    <ion-item button (click)="downloadCollection()">
+        <ion-label>{{'DOWNLOAD_COLLECTION' | translate}}</ion-label>
+        <ion-icon name="download-outline"></ion-icon>
+    </ion-item>
+    <ion-item button (click)="deleteCollection()">
+        <ion-label>{{'DELETE' | translate}}</ion-label>
+        <ion-icon name="trash-outline"></ion-icon>
+    </ion-item>
+</ion-list>

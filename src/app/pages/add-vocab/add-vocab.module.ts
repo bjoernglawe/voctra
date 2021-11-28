@@ -1,19 +1,17 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
-import { AddVocabPageRoutingModule } from './add-vocab.routes';
-import { AddVocabPage } from './add-vocab.page';
+import { PopoverCollectionModule } from 'src/app/shared/popover-collection/popover-collection.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AddVocabPage } from './add-vocab.page';
+import { AddVocabPageRoutingModule } from './add-vocab.routes';
 
 @NgModule({
   imports: [
-    IonicModule,
     FormsModule,
     SharedModule,
     AddVocabPageRoutingModule,
     ReactiveFormsModule,
+    PopoverCollectionModule,
   ],
   declarations: [AddVocabPage]
 })

@@ -6,14 +6,20 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-title>
+    <ion-title *ngIf="!showVocList">
       {{ 'VOCABULARY' | translate }}
     </ion-title>
+    <ion-title *ngIf="showVocList">
+      {{ selectedCollection.title }}
+    </ion-title>
 
-    <ion-buttons slot="primary">
+    <ion-buttons slot="primary" *ngIf="showVocList">
       <ion-button (click)="showVocMore = !showVocMore">
         <ion-icon slot="icon-only" *ngIf="!showVocMore" name="eye-outline"></ion-icon>
         <ion-icon slot="icon-only" *ngIf="showVocMore" name="eye-off-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="presentPopover($event)">
+        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -32,7 +38,8 @@
         class="ion-activatable ripple-parent">
         <ion-ripple-effect></ion-ripple-effect>
         <ion-card-header>
-          <ion-card-subtitle>{{ collection.language }}</ion-card-subtitle>
+          <ion-card-subtitle>{{ collection.language }}
+          </ion-card-subtitle>
           <ion-card-title>{{ collection.title }}</ion-card-title>
         </ion-card-header>
 

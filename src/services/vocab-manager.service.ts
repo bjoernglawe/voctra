@@ -117,4 +117,12 @@ export class VocabManagerService {
     this.saveVocabulary();
     return newCard;
   }
+
+  public deleteCollection(collId: string) {
+    const index = this._vocabStorage.findIndex(coll => coll.id == collId);
+    if (index > -1) {
+      this._vocabStorage.splice(index, 1);
+    }
+    this.saveVocabulary();
+  }
 }
