@@ -1,0 +1,11 @@
+<ion-list>
+    <ion-list-header>
+        Einstellung
+    </ion-list-header>
+    <ion-item button (click)="settings.showPron = !settings.showPron">
+        <ion-label>{{'PRONUNCIATION' | translate}}</ion-label>
+    </ion-item>
+    <ion-item button (click)="settings.showDesc = !settings.showDesc">
+        <ion-label>{{'DESCRIPTION' | translate}}</ion-label>
+    </ion-item>
+</ion-list>

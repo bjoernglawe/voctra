@@ -6,6 +6,12 @@
     <ion-title>
       {{ 'TRAINING' | translate }}
     </ion-title>
+
+    <ion-buttons slot="primary">
+      <ion-button (click)="presentTestPopover($event)">
+        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -15,4 +21,82 @@
       <ion-title size="large">{{ 'TRAINING' | translate }}</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-list>
+    <!-- LANGUAGE ORDER -->
+    <ion-item button (click)="changeOrder()">
+      <div class="test-order">
+        <div *ngIf="settings.order">{{ 'WORD' | translate }} <div class="language-word">{{ getCardLanguage(currentCard)
+            }}</div>
+        </div>
+        <div *ngIf="!settings.order">{{ 'TRANSLATION' | translate }} <div class="language-word">{{
+            getCardTransLanguage(currentCard) }}</div>
+        </div>
+        <div class="test-order-symbol">
+          <ion-icon name="swap-horizontal-outline"></ion-icon>
+        </div>
+        <div *ngIf="settings.order">{{ 'TRANSLATION' | translate }} <div class="language-word">{{
+            getCardTransLanguage(currentCard) }}</div>
+        </div>
+        <div *ngIf="!settings.order">{{ 'WORD' | translate }} <div class="language-word">{{ getCardLanguage(currentCard)
+            }}</div>
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <!-- VOCAB-CARD -->
+  <ng-container *ngIf="currentCard">
+    <form [formGroup]="testFormGroup">
+      <ion-card>
+        <ion-card-content>
+          <ion-input #vocWord class="voc-word-input" formControlName="vocWord" placeholder="{{ 'WORD' | translate }}">
+          </ion-input>
+          <ion-input *ngIf="settings.showPron && currentCard.pronunciation" class="voc-pron-input"
+            formControlName="vocPron" placeholder="{{ 'PRONUNCIATION' | translate }}" [disabled]="true">
+          </ion-input>
+          <ion-input #vocTrans class="voc-trans-input" formControlName="vocTrans" placeholder="{{ 'TRANSLATION' | translate }}">
+          </ion-input>
+          <ion-textarea *ngIf="settings.showDesc && currentCard.description" class="voc-desc-input"
+            formControlName="vocDesc" type="textarea" placeholder="{{ 'DESCRIPTION' | translate }}" [disabled]="true">
+          </ion-textarea>
+        </ion-card-content>
+      </ion-card>
+    </form>
+
+    <!-- SUCCESS // WRONG -->
+    <ion-item color="success" *ngIf="showSuccess">
+      {{ 'SUCCESS' | translate }}
+      <ion-icon name="checkmark-outline" slot="start"></ion-icon>
+    </ion-item>
+    <ion-item color="danger" *ngIf="showWrong">
+      {{ 'WRONG' | translate }}
+      <ion-icon name="close-outline" slot="start"></ion-icon>
+    </ion-item>
+  </ng-container>
 </ion-content>
+
+<ion-footer>
+  <!-- Correct-Bar -->
+  <ng-container *ngIf="currentCard">
+    <div class="correct-row" *ngIf="settings.order"
+      [style]="{'grid-template-columns': 'repeat(' + settings.rowSize + ', 1fr)'}">
+      <div class="correct-row-success" *ngFor="let item of getArrayOfCorrect(currentCard.transCorrectRow)"></div>
+    </div>
+    <div class="correct-row" *ngIf="!settings.order"
+      [style]="{'grid-template-columns': 'repeat(' + settings.rowSize + ', 1fr)'}">
+      <div class="correct-row-success" *ngFor="let item of getArrayOfCorrect(currentCard.wordCorrectRow)"></div>
+    </div>
+  </ng-container>
+
+  <!-- BUTTONS -->
+  <ion-toolbar>
+    <ion-button *ngIf="!currentCard" (click)="selectNextCard()" fill="full">
+      {{ 'START_NEW_TEST' | translate }}
+    </ion-button>
+    <ion-button *ngIf="currentCard" (click)="checkTest()" [disabled]="showSuccess || showWrong" fill="full">
+      {{ "CHECK" | translate }}
+      <ion-icon name="send-outline" slot="end"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

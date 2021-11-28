@@ -1,0 +1,44 @@
+.test-order {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+}
+
+.test-order-symbol {
+    align-self: center;
+}
+
+.language-word {
+    opacity: 0.5;
+}
+
+.voc-word-input {
+    font-size: 25px;
+}
+
+.voc-pron-input {
+    font-size: 16px;
+    //text-align: right;
+}
+
+.voc-trans-input {
+    font-size: 25px;
+}
+
+.voc-desc-input {
+    font-size: 16px;
+}
+
+.correct-row {
+    display: grid;
+    width: 100%;
+    background-color: red;
+    min-height: 5px;
+    opacity: 0.4;
+    .correct-row-success {
+        height: 5px;
+        background-color: green;
+        border-right: solid 1px var(--background);
+    }
+}

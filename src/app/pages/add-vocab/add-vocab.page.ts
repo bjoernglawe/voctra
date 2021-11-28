@@ -36,7 +36,7 @@ export class AddVocabPage {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((collections: E_VocabCollection[]) => {
         this.vocabCollections = collections;
-        if (!this.vocabFormGroup.get('collection').value) {
+        if (!this.vocabFormGroup.get('collection').value || this.vocabFormGroup.get('collection').value == 'new') {
           if (collections.length <= 0) {
             this.vocabFormGroup.get('collection').setValue("new");
           } else {

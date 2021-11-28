@@ -63,7 +63,6 @@ export class VocabularyPage {
     }
   }
 
-  
   public async presentVocPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: PopoverVocabularyComponent,

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { PopoverTestModule } from 'src/app/shared/popover-test/popover-test.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { VocabTestPage } from './vocab-test.page';
 import { VocabTestPageRoutingModule } from './vocab-test.routes';
@@ -10,7 +11,9 @@ import { VocabTestPageRoutingModule } from './vocab-test.routes';
     IonicModule,
     FormsModule,
     SharedModule,
-    VocabTestPageRoutingModule
+    VocabTestPageRoutingModule,
+    ReactiveFormsModule,
+    PopoverTestModule,
   ],
   declarations: [VocabTestPage]
 })

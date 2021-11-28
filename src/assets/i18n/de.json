@@ -23,5 +23,7 @@
   "TRANSLATION": "Übersetzung",
   "DESCRIPTION": "Beschreibung",
   "DELETE": "Löschen",
-  "DOWNLOAD_COLLECTION": "Herunterladen"
+  "DOWNLOAD_COLLECTION": "Herunterladen",
+  "CHECK": "Überprüfen",
+  "START_NEW_TEST": "Test starten"
 }

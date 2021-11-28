@@ -1,8 +1,7 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { PopoverVocabularyComponent } from './popover-vocabulary/popover-vocabulary.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [],

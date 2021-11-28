@@ -11,10 +11,15 @@ export interface E_VocabCollection {
 
 export interface E_VocabCard {
     id: string;
+    collectionId: string;
     word: string;
     pronunciation?: string;
     description?: string;
     translation: string;
-    correct: number;
-    wrong: number;
+    transCorrect: number;
+    transWrong: number;
+    wordCorrect: number;
+    wordWrong: number;
+    transCorrectRow: number;
+    wordCorrectRow: number;
 }

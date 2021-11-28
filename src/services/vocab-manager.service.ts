@@ -97,10 +97,15 @@ export class VocabManagerService {
   ): E_VocabCard {
     let newCard: E_VocabCard = {
       id: uuidv4(),
+      collectionId: collectionId,
       word,
       translation,
-      correct: 0,
-      wrong: 0,
+      transCorrect: 0,
+      transWrong: 0,
+      wordCorrect: 0,
+      wordWrong: 0,
+      transCorrectRow: 0,
+      wordCorrectRow: 0,
     }
     if (pronunciation) {
       newCard.pronunciation = pronunciation;
