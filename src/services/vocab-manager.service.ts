@@ -125,4 +125,9 @@ export class VocabManagerService {
     }
     this.saveVocabulary();
   }
+
+  public addCollection(collection: E_VocabCollection) {
+    this._vocabStorage.push(collection);
+    this.saveVocabulary();
+  }
 }

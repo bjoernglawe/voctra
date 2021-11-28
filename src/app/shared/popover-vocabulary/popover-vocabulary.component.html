@@ -1,0 +1,10 @@
+<ion-list>
+    <ion-list-header>
+        {{ "VOCABULARY" | translate }}
+    </ion-list-header>
+    <ion-item button>
+        <ion-label>{{'UPLOAD_COLLECTION' | translate}}</ion-label>
+        <input type="file" accept="application/json" (change)="uploadCollection($event)"/>
+        <ion-icon name="add-circle-outline"></ion-icon>
+    </ion-item>
+</ion-list>

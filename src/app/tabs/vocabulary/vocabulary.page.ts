@@ -3,6 +3,7 @@ import { PopoverController } from '@ionic/angular';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PopoverCollectionComponent } from 'src/app/shared/popover-collection/popover-collection.component';
+import { PopoverVocabularyComponent } from 'src/app/shared/popover-vocabulary/popover-vocabulary.component';
 import { E_VocabCollection } from 'src/models/vocabulary.model';
 import { VocabManagerService } from 'src/services/vocab-manager.service';
 
@@ -27,8 +28,6 @@ export class VocabularyPage {
     this.vocabService.getAllVocabulary()
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((respCollections: E_VocabCollection[]) => {
-        console.log(respCollections);
-
         this.collections = respCollections;
       });
     this.vocabService.loadVocabulary();
@@ -44,8 +43,7 @@ export class VocabularyPage {
     this.showVocList = true;
   }
 
-
-  public async presentPopover(ev: any) {
+  public async presentCollPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: PopoverCollectionComponent,
       cssClass: '',
@@ -65,4 +63,19 @@ export class VocabularyPage {
     }
   }
 
+  
+  public async presentVocPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: PopoverVocabularyComponent,
+      cssClass: '',
+      event: ev,
+      showBackdrop: true,
+      translucent: true,
+      keyboardClose: true,
+      componentProps: {collection: this.selectedCollection},
+    });
+    await popover.present();
+
+    const { data } = await popover.onDidDismiss();
+  }
 }

@@ -15,16 +15,13 @@ export class PopoverCollectionComponent implements OnInit {
 
   constructor(
     private popover: PopoverController,
-  ) {
-    console.log(popover);
-    console.log(this.collection);
-  }
+  ) {  }
 
   ngOnInit(): void {
   }
 
   ClosePopover() {
-    this.popover.dismiss("HELLO");
+    this.popover.dismiss();
   }
 
   public deleteCollection() {

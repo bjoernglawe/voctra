@@ -5,10 +5,8 @@ import { SharedModule } from '../shared.module';
 import { PopoverCollectionComponent } from './popover-collection.component';
 
 
-
 @NgModule({
   imports: [
-    CommonModule,
     IonicModule,
     SharedModule,
   ],

@@ -18,7 +18,13 @@
         <ion-icon slot="icon-only" *ngIf="!showVocMore" name="eye-outline"></ion-icon>
         <ion-icon slot="icon-only" *ngIf="showVocMore" name="eye-off-outline"></ion-icon>
       </ion-button>
-      <ion-button (click)="presentPopover($event)">
+      <ion-button (click)="presentCollPopover($event)">
+        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
+    <ion-buttons slot="primary" *ngIf="!showVocList">
+      <ion-button (click)="presentVocPopover($event)">
         <ion-icon name="ellipsis-vertical-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
