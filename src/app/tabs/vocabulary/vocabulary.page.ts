@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PopoverCollectionComponent } from 'src/app/shared/popover-collection/popover-collection.component';
 import { PopoverVocabularyComponent } from 'src/app/shared/popover-vocabulary/popover-vocabulary.component';
-import { E_VocabCollection } from 'src/models/vocabulary.model';
+import { E_VocabCard, E_VocabCollection } from 'src/models/vocabulary.model';
 import { VocabManagerService } from 'src/services/vocab-manager.service';
 
 @Component({
@@ -19,7 +19,11 @@ export class VocabularyPage {
 
   public showVocMore: boolean = false;
   public showVocList: boolean = false;
+  public showSearch: boolean = false;
+  public showSearchResults: boolean = false;
+
   public selectedCollection: E_VocabCollection = undefined;
+  public selectedCards: E_VocabCard[] = [];
 
   constructor(
     private vocabService: VocabManagerService,
@@ -55,12 +59,12 @@ export class VocabularyPage {
       showBackdrop: true,
       translucent: true,
       keyboardClose: true,
-      componentProps: {collection: this.selectedCollection},
+      componentProps: { collection: this.selectedCollection },
     });
     await popover.present();
 
     const { data } = await popover.onDidDismiss();
-    
+
     if (data == "delete") {
       this.vocabService.deleteCollection(this.selectedCollection.id);
       this.showVocList = false;
@@ -75,10 +79,48 @@ export class VocabularyPage {
       showBackdrop: true,
       translucent: true,
       keyboardClose: true,
-      componentProps: {collection: this.selectedCollection},
+      componentProps: { collection: this.selectedCollection },
     });
     await popover.present();
 
     const { data } = await popover.onDidDismiss();
+  }
+
+  public setSearch(event: any) {
+    const searchTerm = (event.detail.value as string).toLowerCase();
+
+    if (searchTerm.length <= 0) {
+      this.showSearchResults = false;
+      return;
+    }
+
+    let vocabList: E_VocabCard[] = [];
+
+    this.collections.forEach(vocColl => {
+      vocColl.vocabulary.forEach(vocCard => {
+        if (vocCard.word?.toLowerCase().includes(searchTerm) ||
+          vocCard.translation?.toLowerCase().includes(searchTerm) ||
+          vocCard.pronunciation?.toLowerCase().includes(searchTerm) ||
+          vocCard.description?.toLowerCase().includes(searchTerm)) {
+          vocabList.push(vocCard);
+        }
+      });
+    });
+
+    this.selectedCards = vocabList;
+    this.showSearchResults = true;
+  }
+
+  public toggleSearchbar() {
+    if (!this.showSearch) {
+      this.showSearch = true;
+    } else {
+      this.closeSearchbar();
+    }
+  }
+
+  public closeSearchbar() {
+    this.showSearchResults = false;
+    this.showSearch = false;
   }
 }

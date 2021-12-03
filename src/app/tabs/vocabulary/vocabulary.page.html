@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons *ngIf="showVocList" slot="start">
       <ion-button (click)="showVocList = false">
-        <ion-icon name="arrow-back-outline"></ion-icon>
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
 
@@ -13,19 +13,25 @@
       {{ selectedCollection.title }}
     </ion-title>
 
+    <!-- Vocabulary-Collections -->
+    <ion-buttons slot="primary" *ngIf="!showVocList">
+      <ion-button (click)="toggleSearchbar()">
+        <ion-icon *ngIf="!showSearch" slot="icon-only" name="search-outline"></ion-icon>
+        <ion-icon *ngIf="showSearch" slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="presentVocPopover($event)">
+        <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <!-- Vocabulary-List -->
     <ion-buttons slot="primary" *ngIf="showVocList">
       <ion-button (click)="showVocMore = !showVocMore">
         <ion-icon slot="icon-only" *ngIf="!showVocMore" name="eye-outline"></ion-icon>
         <ion-icon slot="icon-only" *ngIf="showVocMore" name="eye-off-outline"></ion-icon>
       </ion-button>
       <ion-button (click)="presentCollPopover($event)">
-        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    
-    <ion-buttons slot="primary" *ngIf="!showVocList">
-      <ion-button (click)="presentVocPopover($event)">
-        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+        <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -38,7 +44,17 @@
     </ion-toolbar>
   </ion-header>
 
-  <ng-container *ngIf="!showVocList">
+  <ng-container *ngIf="showSearch">
+    <ion-searchbar 
+      class="searchbar" 
+      showCancelButton="focus" 
+      placeholder="{{ 'SEARCH' | translate }}"
+      (ionChange)="setSearch($event)"
+      (ionCancel)="closeSearchbar()"></ion-searchbar>
+  </ng-container>
+
+  <!-- Vocabulary-Collections -->
+  <ng-container *ngIf="!showVocList && !showSearchResults">
     <ng-container *ngFor="let collection of collections">
       <ion-card [style]="{'background-color': collection.color}" (click)="selectCollection(collection)"
         class="ion-activatable ripple-parent">
@@ -56,9 +72,24 @@
     </ng-container>
   </ng-container>
 
-
-  <ion-list *ngIf="showVocList && selectedCollection">
+  <!-- Vocabulary-List -->
+  <ion-list *ngIf="showVocList && selectedCollection && !showSearchResults">
     <ng-container *ngFor="let vocCard of selectedCollection.vocabulary">
+      <ion-item matRipple class="ion-activatable ripple-parent">
+        <ion-ripple-effect></ion-ripple-effect>
+        <div class="vocab-item-grid">
+          <div class="vocab-word">{{vocCard.word}}</div>
+          <div class="vocab-translation">{{vocCard.translation}}</div>
+          <div class="vocab-pronunciation" *ngIf="showVocMore">{{vocCard.pronunciation}}</div>
+          <div class="vocab-description" *ngIf="showVocMore">{{vocCard.description}}</div>
+        </div>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+
+  <!-- Search-Results -->  
+  <ion-list *ngIf="showSearchResults">
+    <ng-container *ngFor="let vocCard of selectedCards">
       <ion-item matRipple class="ion-activatable ripple-parent">
         <ion-ripple-effect></ion-ripple-effect>
         <div class="vocab-item-grid">
