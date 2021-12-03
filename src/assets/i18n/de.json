@@ -25,5 +25,10 @@
   "DELETE": "Löschen",
   "DOWNLOAD_COLLECTION": "Herunterladen",
   "CHECK": "Überprüfen",
-  "START_NEW_TEST": "Test starten"
+  "START_NEW_TEST": "Test starten",
+  "SAVE_VOCABULARY": "Vokabel hinzugefügt",
+  "SAVE_COLLECTION": "Neue Vokabelsammlung hinzugefügt",
+  "DELETE_COLLECTION": "Vokabelsammlung löschen?",
+  "DELETE_COLLECTION_TITLE": "Soll \"{{title}}\" gelöscht werden?",
+  "COLLECTION_DELETED": "Vokabelsammlung gelöscht!"
 }

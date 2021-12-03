@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { E_VocabCollection } from 'src/models/vocabulary.model';
@@ -28,6 +29,8 @@ export class AddVocabModalComponent implements OnInit {
   constructor(
     private vocabService: VocabManagerService,
     private modalController: ModalController,
+    private toastController: ToastController,
+    private translateService: TranslateService,
   ) {
     this.vocabService.getAllVocabulary()
       .pipe(takeUntil(this.ngUnsubscribe))
@@ -73,10 +76,22 @@ export class AddVocabModalComponent implements OnInit {
     const vocDesc = this.vocabFormGroup.get('vocDesc').value;
 
     this.vocabService.createVocabCard(collection, vocWord, vocTrans, vocPron, vocDesc);
+    this.toastSave(vocWord, vocTrans);
 
     this.vocabFormGroup.get('vocWord').setValue(undefined);
     this.vocabFormGroup.get('vocTrans').setValue(undefined);
     this.vocabFormGroup.get('vocPron').setValue(undefined);
     this.vocabFormGroup.get('vocDesc').setValue(undefined);
+  }
+
+  private async toastSave(word: string, translation: string) {
+    const toast = await this.toastController.create({
+      header: this.translateService.instant('SAVE_VOCABULARY'),
+      message: word + ' - ' + translation,
+      color: 'success',
+      position: 'bottom',
+      duration: 2000,
+    });
+    toast.present();
   }
 }

@@ -25,5 +25,10 @@
   "DELETE": "Delete",
   "DOWNLOAD_COLLECTION": "Download",
   "CHECK": "Check",
-  "START_NEW_TEST": "Start Test"
+  "START_NEW_TEST": "Start Test",
+  "SAVE_VOCABULARY": "Vocabulary added",
+  "SAVE_COLLECTION": "Added new Vocabulary Collection",
+  "DELETE_COLLECTION": "Delete Vocabulary-Collection?",
+  "DELETE_COLLECTION_TITLE": "Should \"{{title}}\" be deleted?",
+  "COLLECTION_DELETED": "Vocabulary-Collection deleted!"
 }

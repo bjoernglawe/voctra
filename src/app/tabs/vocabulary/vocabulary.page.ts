@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ModalController, Platform, PopoverController } from '@ionic/angular';
+import { AlertController, ModalController, Platform, PopoverController, ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AddCollectionModalComponent } from 'src/app/pages/add-collection-modal/add-collection-modal.component';
@@ -31,6 +32,9 @@ export class VocabularyPage {
     private vocabService: VocabManagerService,
     private popoverController: PopoverController,
     private platform: Platform,
+    private translateService: TranslateService,
+    private alertController: AlertController,
+    private toastController: ToastController,
   ) {
     this.vocabService.getAllVocabulary()
       .pipe(takeUntil(this.ngUnsubscribe))
@@ -68,8 +72,35 @@ export class VocabularyPage {
     const { data } = await popover.onDidDismiss();
 
     if (data == "delete") {
-      this.vocabService.deleteCollection(this.selectedCollection.id);
-      this.showVocList = false;
+      const alert = await this.alertController.create({
+        header: this.translateService.instant('DELETE_COLLECTION'),
+        message: this.translateService.instant('DELETE_COLLECTION_TITLE', { title: this.selectedCollection.title }),
+        buttons: [
+          {
+            text: this.translateService.instant('CANCEL'),
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: () => { }
+          }, {
+            text: this.translateService.instant('OKAY'),
+            handler: async () => {
+              this.vocabService.deleteCollection(this.selectedCollection.id);
+              this.showVocList = false;
+
+              const toast = await this.toastController.create({
+                header: this.translateService.instant('COLLECTION_DELETED'),
+                message: this.selectedCollection.title,
+                color: 'danger',
+                position: 'bottom',
+                duration: 2000,
+              });
+              toast.present();
+            }
+          }
+        ]
+      });
+
+      await alert.present();
     }
   }
 
