@@ -1,0 +1,17 @@
+<!-- 
+<ion-fab-button [routerLink]="['/add-vocab']" routerLinkActive="router-link-active">
+    <ion-icon name="add"></ion-icon>
+</ion-fab-button> 
+-->
+
+<ion-fab-button>
+    <ion-icon name="add"></ion-icon>
+</ion-fab-button>
+<ion-fab-list side="top">
+    <ion-fab-button (click)="openAddVocabModal()" title="{{ 'ADD_VOCABULARY' | translate }}">
+        <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button (click)="openAddCollectionModal()" title="{{ 'CREATE_NEW_COLLECTION' | translate }}">
+        <ion-icon name="duplicate-outline"></ion-icon>
+    </ion-fab-button>
+</ion-fab-list>

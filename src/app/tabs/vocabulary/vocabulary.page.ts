@@ -31,7 +31,6 @@ export class VocabularyPage {
     private vocabService: VocabManagerService,
     private popoverController: PopoverController,
     private platform: Platform,
-    private modalController: ModalController,
   ) {
     this.vocabService.getAllVocabulary()
       .pipe(takeUntil(this.ngUnsubscribe))
@@ -125,19 +124,5 @@ export class VocabularyPage {
   public closeSearchbar() {
     this.showSearchResults = false;
     this.showSearch = false;
-  }
-
-  public async openAddVocabModal() {
-    const modal = await this.modalController.create({
-      component: AddVocabModalComponent,
-    });
-    return await modal.present();
-  }
-
-  public async openAddCollectionModal() {
-    const modal = await this.modalController.create({
-      component: AddCollectionModalComponent,
-    });
-    return await modal.present();
   }
 }
