@@ -4,8 +4,12 @@
     </ion-list-header>
     <ion-item button (click)="settings.showPron = !settings.showPron">
         <ion-label>{{'PRONUNCIATION' | translate}}</ion-label>
+        <ion-icon name="eye-outline" slot="end" *ngIf="settings.showPron"></ion-icon>
+        <ion-icon name="eye-off-outline" slot="end" *ngIf="!settings.showPron"></ion-icon>
     </ion-item>
     <ion-item button (click)="settings.showDesc = !settings.showDesc">
         <ion-label>{{'DESCRIPTION' | translate}}</ion-label>
+        <ion-icon name="eye-outline" slot="end" *ngIf="settings.showDesc"></ion-icon>
+        <ion-icon name="eye-off-outline" slot="end" *ngIf="!settings.showDesc"></ion-icon>
     </ion-item>
 </ion-list>

@@ -29,12 +29,12 @@ export class VocabTestPage {
   public settings: {
     showPron: boolean,
     showDesc: boolean,
-    order: boolean,       // true: Word -> Translation
+    order: boolean,
     rowSize: number,
   } = {
       showPron: false,
       showDesc: false,
-      order: true,
+      order: true,       // true: Word (disabled) -> Translation (input)
       rowSize: 10,
     }
 
@@ -137,7 +137,8 @@ export class VocabTestPage {
 
   public checkTest() {
     if (this.settings.order) { // TRANSLATION CHECK
-      if (this.testFormGroup.get('vocTrans').value == this.currentCard.translation) {
+      if (this.testFormGroup.get('vocTrans').value &&
+        (this.testFormGroup.get('vocTrans').value as string).toLowerCase() == this.currentCard.translation.toLowerCase()) {
         this.currentCard.transCorrect++;
         this.currentCard.transCorrectRow = this.rowCounterAdd(this.currentCard.transCorrectRow);
         this.showSuccess = true;
@@ -147,7 +148,8 @@ export class VocabTestPage {
         this.showWrong = true;
       }
     } else {  // WORD CHECK
-      if (this.testFormGroup.get('vocTrans').value == this.currentCard.translation) {
+      if (this.testFormGroup.get('vocWord').value &&
+        (this.testFormGroup.get('vocWord').value as string).toLowerCase() == this.currentCard.word.toLowerCase()) {
         this.currentCard.wordCorrect++;
         this.currentCard.wordCorrectRow = this.rowCounterAdd(this.currentCard.wordCorrectRow);
         this.showSuccess = true;

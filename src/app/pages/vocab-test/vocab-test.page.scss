@@ -9,12 +9,41 @@
     align-self: center;
 }
 
+.training-container {
+    max-width: 500px;
+    margin: auto;
+}
+
+.training-card {
+
+}
+
+.voc-input {
+    --color: black;
+
+    &:not([aria-disabled=true]) {
+        border-bottom: solid 0.5px rgb(83, 83, 83);
+    }
+
+    ::ng-deep{
+        .native-input[disabled].sc-ion-input-md {
+            opacity: 1;
+        }
+    }
+}
+
 .language-word {
     opacity: 0.5;
 }
 
 .voc-word-input {
     font-size: 25px;
+}
+
+.correct-word {
+    font-size: 25px;
+    margin: 0 0 0 8px;
+    position: absolute;
 }
 
 .voc-pron-input {
@@ -26,8 +55,34 @@
     font-size: 25px;
 }
 
+.correct-translation {
+    font-size: 25px;
+    margin: 0 0 0 8px;
+    position: absolute;
+}
+
 .voc-desc-input {
     font-size: 16px;
+}
+
+.hideCheck {
+    color: rgb(196, 196, 196);
+    .correct-translation {
+        color: black;
+    }
+    .correct-word {
+        color: black;
+    }
+}
+
+.visibilityHide {
+    opacity: 0.3;
+    filter: blur(4px);
+    transition: filter 0.2s ease, opacity 0.2s ease;
+    &:hover{
+        opacity: 1;
+        filter: none;
+    }
 }
 
 .correct-row {
