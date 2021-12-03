@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { NavController, Platform, PopoverController } from '@ionic/angular';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { PopoverTestComponent } from 'src/app/shared/popover-test/popover-test.component';
+import { PopoverTestComponent } from 'src/app/shared/popover/popover-test/popover-test.component';
 import { E_VocabCard, E_VocabCollection } from 'src/models/vocabulary.model';
 import { VocabManagerService } from 'src/services/vocab-manager.service';
 

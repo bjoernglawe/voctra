@@ -1,0 +1,56 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>
+			{{ 'ADD_VOCABULARY' | translate }}
+		</ion-title>
+
+		<ion-buttons slot="primary">
+			<ion-button (click)="closeModal()">
+				<ion-icon slot="icon-only" name="close-outline"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+	<form [formGroup]="vocabFormGroup" *ngIf="!collectionMissing else missingCollection">
+		<!-- COLLECTION SELECTION -->
+		<ion-item>
+			<ion-label>{{ "VOCAB_COLLECTION" | translate }}</ion-label>
+			<ion-select formControlName="collection" interface="action-sheet" multiple="false"
+				cancelText="{{ 'CANCEL' | translate }}" okText="{{ 'OKAY' | translate }}">
+				<ion-select-option *ngFor="let collection of vocabCollections" value="{{ collection.id }}"> {{
+					collection.title }} </ion-select-option>
+			</ion-select>
+		</ion-item>
+		<label *ngIf="vocabFormGroup.get('collection').touched && vocabFormGroup.get('collection').errors?.['required']"
+			class="input-error-label">{{ "SELECT_COLLECTION_REQUIRED" | translate }}</label>
+
+		<!-- VOCABULARY CARD -->
+		<ion-card>
+			<ion-card-content>
+				<ion-input class="voc-word-input" formControlName="vocWord" placeholder="{{ 'WORD' | translate }}">
+				</ion-input>
+				<ion-input class="voc-pron-input" formControlName="vocPron" placeholder="{{ 'PRONUNCIATION' | translate }}">
+				</ion-input>
+				<ion-input class="voc-trans-input" formControlName="vocTrans" placeholder="{{ 'TRANSLATION' | translate }}">
+				</ion-input>
+				<ion-textarea class="voc-desc-input" formControlName="vocDesc" type="textarea"
+					placeholder="{{ 'DESCRIPTION' | translate }}">
+				</ion-textarea>
+				<ion-item lines="none" button (click)="saveNewVocCard()">
+					{{ "SAVE" | translate }}
+					<ion-icon slot="end" name="save-outline"></ion-icon>
+				</ion-item>
+			</ion-card-content>
+		</ion-card>
+	</form>
+
+	<ng-template #missingCollection>
+		<ion-title>{{ 'COLLECTION_MISSING' | translate }}</ion-title>
+	</ng-template>
+	
+</ion-content>

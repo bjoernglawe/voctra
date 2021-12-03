@@ -1,0 +1,70 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>
+			{{ 'CREATE_NEW_COLLECTION' | translate }}
+		</ion-title>
+
+		<ion-buttons slot="primary">
+			<ion-button (click)="closeModal()">
+				<ion-icon slot="icon-only" name="close-outline"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<form [formGroup]="vocabFormGroup">
+		<ion-list>
+			<!-- new Collection -->
+			<ion-item>
+				<ion-label position="floating">{{ "TITLE" | translate }}</ion-label>
+				<ion-input formControlName="collTitle" placeholder="{{ 'TITLE' | translate }}"></ion-input>
+			</ion-item>
+			<label
+				*ngIf="vocabFormGroup.get('collTitle').touched && vocabFormGroup.get('collTitle').errors?.['required']"
+				class="input-error-label">{{ "COLLECTION_TITLE_REQUIRED" | translate }}</label>
+			<ion-item>
+				<ion-label position="floating">{{ "LANGUAGE" | translate }}</ion-label>
+				<ion-input formControlName="collLanguage" placeholder="{{ 'LANGUAGE' | translate }}"></ion-input>
+			</ion-item>
+			<label
+				*ngIf="vocabFormGroup.get('collLanguage').touched && vocabFormGroup.get('collLanguage').errors?.['required']"
+				class="input-error-label">{{ "COLLECTION_LANGUAGE_REQUIRED" | translate }}</label>
+			<ion-item>
+				<ion-label position="floating">{{ "TRANSLATE_LANGUAGE" | translate }}</ion-label>
+				<ion-input formControlName="collTranslateLang" placeholder="{{ 'TRANSLATE_LANGUAGE' | translate }}">
+				</ion-input>
+			</ion-item>
+			<label
+				*ngIf="vocabFormGroup.get('collTranslateLang').touched && vocabFormGroup.get('collTranslateLang').errors?.['required']"
+				class="input-error-label">{{ "COLLECTION_TRANSLATE_LANGUAGE_REQUIRED" | translate }}</label>
+			<ion-item>
+				<ion-label position="floating">{{ "COLLECTION_DESCRIPTION" | translate }}</ion-label>
+				<ion-input formControlName="collDescription" placeholder="{{ 'COLLECTION_DESCRIPTION' | translate }}">
+				</ion-input>
+			</ion-item>
+			<ion-item color="{{vocabFormGroup.get('collColor').value}}">
+				<ion-label position="floating">{{ "COLLECTION_COLOR" | translate }}</ion-label>
+				<ion-select formControlName="collColor" interface="popover" class="custom-options">
+					<ion-select-option value="#3880ff">Primary</ion-select-option>
+					<ion-select-option value="#3dc2ff">Secondary</ion-select-option>
+					<ion-select-option value="#5260ff">Tertiary</ion-select-option>
+					<ion-select-option value="#2dd36f">Success</ion-select-option>
+					<ion-select-option value="#ffc409">Warning</ion-select-option>
+					<ion-select-option value="#eb445a">Danger</ion-select-option>
+					<ion-select-option value="#222428">Dark</ion-select-option>
+					<ion-select-option value="#92949c">Medium</ion-select-option>
+					<ion-select-option value="#f4f5f8">Light</ion-select-option>
+					<ion-select-option value="">None</ion-select-option>
+				</ion-select>
+			</ion-item>
+			<ion-item lines="none" button color="success" (click)="saveNewCollection()">
+				<ion-icon slot="start" name="save-outline"></ion-icon>
+				{{ "SAVE" | translate }}
+			</ion-item>
+		</ion-list>
+	</form>
+</ion-content>

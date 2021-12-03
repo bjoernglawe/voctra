@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { Platform, PopoverController } from '@ionic/angular';
+import { ModalController, Platform, PopoverController } from '@ionic/angular';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { PopoverCollectionComponent } from 'src/app/shared/popover-collection/popover-collection.component';
-import { PopoverVocabularyComponent } from 'src/app/shared/popover-vocabulary/popover-vocabulary.component';
+import { AddCollectionModalComponent } from 'src/app/pages/add-collection-modal/add-collection-modal.component';
+import { AddVocabModalComponent } from 'src/app/pages/add-vocab-modal/add-vocab-modal.component';
+import { PopoverCollectionComponent } from 'src/app/shared/popover/popover-collection/popover-collection.component';
+import { PopoverVocabularyComponent } from 'src/app/shared/popover/popover-vocabulary/popover-vocabulary.component';
 import { E_VocabCard, E_VocabCollection } from 'src/models/vocabulary.model';
 import { VocabManagerService } from 'src/services/vocab-manager.service';
 
@@ -29,6 +31,7 @@ export class VocabularyPage {
     private vocabService: VocabManagerService,
     private popoverController: PopoverController,
     private platform: Platform,
+    private modalController: ModalController,
   ) {
     this.vocabService.getAllVocabulary()
       .pipe(takeUntil(this.ngUnsubscribe))
@@ -122,5 +125,19 @@ export class VocabularyPage {
   public closeSearchbar() {
     this.showSearchResults = false;
     this.showSearch = false;
+  }
+
+  public async openAddVocabModal() {
+    const modal = await this.modalController.create({
+      component: AddVocabModalComponent,
+    });
+    return await modal.present();
+  }
+
+  public async openAddCollectionModal() {
+    const modal = await this.modalController.create({
+      component: AddCollectionModalComponent,
+    });
+    return await modal.present();
   }
 }
