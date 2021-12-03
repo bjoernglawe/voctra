@@ -8,6 +8,7 @@ import { TabsPageRoutingModule } from './tabs.routes';
 import { TabsPage } from './tabs.page';
 import { RouterLink, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { TranslateModule } from '@ngx-translate/core';
     RouterModule,
     TabsPageRoutingModule,
     TranslateModule.forChild(),
+    SharedModule,
   ],
   declarations: [TabsPage],
   providers: []
