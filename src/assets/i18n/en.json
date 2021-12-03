@@ -30,5 +30,6 @@
   "SAVE_COLLECTION": "Added new Vocabulary Collection",
   "DELETE_COLLECTION": "Delete Vocabulary-Collection?",
   "DELETE_COLLECTION_TITLE": "Should \"{{title}}\" be deleted?",
-  "COLLECTION_DELETED": "Vocabulary-Collection deleted!"
+  "COLLECTION_DELETED": "Vocabulary-Collection deleted!",
+  "UPLOAD_COLLECTION": "upload"
 }
