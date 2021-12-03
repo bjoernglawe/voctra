@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { PopoverController } from '@ionic/angular';
+import { NavController, Platform, PopoverController } from '@ionic/angular';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PopoverTestComponent } from 'src/app/shared/popover-test/popover-test.component';
@@ -48,6 +48,8 @@ export class VocabTestPage {
   constructor(
     private vocabService: VocabManagerService,
     private popoverController: PopoverController,
+    private platform: Platform,
+    private navCtrl: NavController,
   ) {
     this.vocabService.getAllVocabulary()
       .pipe(takeUntil(this.ngUnsubscribe))
@@ -58,6 +60,9 @@ export class VocabTestPage {
           this.vocabCards = this.vocabCards.concat(collection.vocabulary);
         });
       });
+    this.platform.backButton.subscribeWithPriority(10, () => {
+      this.navCtrl.back()
+    });
   }
 
   ngOnInit() {

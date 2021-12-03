@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { Platform, PopoverController } from '@ionic/angular';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PopoverCollectionComponent } from 'src/app/shared/popover-collection/popover-collection.component';
@@ -24,6 +24,7 @@ export class VocabularyPage {
   constructor(
     private vocabService: VocabManagerService,
     private popoverController: PopoverController,
+    private platform: Platform,
   ) {
     this.vocabService.getAllVocabulary()
       .pipe(takeUntil(this.ngUnsubscribe))
@@ -31,6 +32,9 @@ export class VocabularyPage {
         this.collections = respCollections;
       });
     this.vocabService.loadVocabulary();
+    this.platform.backButton.subscribeWithPriority(10, () => {
+      this.showVocList = false;
+    });
   }
 
   ngOnDestroy(): void {
