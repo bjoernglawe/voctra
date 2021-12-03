@@ -112,7 +112,7 @@ export class VocabularyPage {
       showBackdrop: true,
       translucent: true,
       keyboardClose: true,
-      componentProps: { collection: this.selectedCollection },
+      componentProps: { collections: this.collections },
     });
     await popover.present();
 

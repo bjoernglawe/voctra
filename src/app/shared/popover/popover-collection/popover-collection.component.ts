@@ -30,7 +30,7 @@ export class PopoverCollectionComponent implements OnInit {
 
   public downloadCollection() {
 
-    let fileName = this.validFilename(this.collection.title) ? this.collection.title : 'data' + '.json';
+    let fileName = this.validFilename(this.collection.title) ? this.collection.title.replace(/\s+/g, '_') : 'data' + '.json';
     let jsonContent = JSON.stringify(this.collection);
 
     if (Capacitor.getPlatform() == 'android') {
@@ -56,6 +56,6 @@ export class PopoverCollectionComponent implements OnInit {
   }
 
   private validFilename(filename: string): boolean {
-    return /^[a-z0-9_.@()-]+\.[^.]+$/i.test(filename)
+    return /^(?:[A-Za-z]+)(?:[A-Za-z0-9 _]*)$/i.test(filename)
   }
 }

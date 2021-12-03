@@ -31,5 +31,7 @@
   "DELETE_COLLECTION": "Delete Vocabulary-Collection?",
   "DELETE_COLLECTION_TITLE": "Should \"{{title}}\" be deleted?",
   "COLLECTION_DELETED": "Vocabulary-Collection deleted!",
-  "UPLOAD_COLLECTION": "upload"
+  "UPLOAD_COLLECTION": "Upload",
+  "DOWNLOAD_ALL": "Download",
+  "COLLECTION_MISSING": "No Vocabulary Collections found"
 }
