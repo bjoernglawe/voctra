@@ -19,10 +19,10 @@
 }
 
 .voc-input {
-    --color: black;
+    --color: var(--ion-text-color);
 
     &:not([aria-disabled=true]) {
-        border-bottom: solid 0.5px rgb(83, 83, 83);
+        border-bottom: solid 0.5px var(--ion-color-step-500);
     }
 
     ::ng-deep{
@@ -72,11 +72,13 @@
     text-align: center;
     font-size: 25px;
     height: 200px;
-    background: #ebebeb;
+    background: var(--ion-card-background);
+    color: var(--ion-text-color);
     border-radius: 100%;
     overflow: hidden;
     margin-top: 20%;
     vertical-align: middle;
+    cursor: pointer;
     box-shadow: rgb(0 0 0 / 20%) 0px 3px 1px -2px, rgb(0 0 0 / 14%) 0px 2px 2px 0px, rgb(0 0 0 / 12%) 0px 1px 5px 0px;
     p {
         margin: 0;
@@ -85,12 +87,12 @@
 }
 
 .hideCheck {
-    color: rgb(196, 196, 196);
+    color: var(--ion-color-step-250);
     .correct-translation {
-        color: black;
+        color: var(--ion-text-color);
     }
     .correct-word {
-        color: black;
+        color: var(--ion-text-color);
     }
 }
 
@@ -107,12 +109,12 @@
 .correct-row {
     display: grid;
     width: 100%;
-    background-color: red;
+    background-color: var(--ion-color-danger);
     min-height: 5px;
     opacity: 0.4;
     .correct-row-success {
         height: 5px;
-        background-color: green;
-        border-right: solid 1px var(--background);
+        background-color: var(--ion-color-success);
+        border-right: solid 1px var(--ion-background-color);
     }
 }

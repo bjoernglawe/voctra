@@ -13,13 +13,10 @@ export class StorageService {
   constructor(
     private storage: Storage,
   ) {
-    this.init();
-  }
-
-  async init() {
-    const storage = await this.storage.create();
-    this._storage = storage;
-    this.storageInitSubject.next(true);
+    this.storage.create().then(storage => {
+      this._storage = storage;
+      this.storageInitSubject.next(true);
+    });
   }
 
   public getReadyInitSubject(): BehaviorSubject<boolean> {

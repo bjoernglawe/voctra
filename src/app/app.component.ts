@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Config } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
+import { ThemeService } from 'src/services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,7 @@ export class AppComponent {
   constructor(
     private translate: TranslateService,
     private config: Config,
+    private themeService: ThemeService,
   ) {
     this.initTranslate();
   }
