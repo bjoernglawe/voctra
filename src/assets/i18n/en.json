@@ -34,5 +34,10 @@
   "UPLOAD_COLLECTION": "Upload",
   "DOWNLOAD_ALL": "Download",
   "COLLECTION_MISSING": "No Vocabulary Collections found",
-  "GO_ON": "Go On"
+  "GO_ON": "Go On",
+  "COLLECTIONS": "Collections",
+  "LEARNED": "learned",
+  "OPEN": "open",
+  "IMPRINT": "Imprint",
+  "BJOERN_GLAWE": "Björn Glawe"
 }

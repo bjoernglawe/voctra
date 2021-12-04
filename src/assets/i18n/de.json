@@ -34,5 +34,10 @@
   "UPLOAD_COLLECTION": "Hochladen",
   "DOWNLOAD_ALL": "Herunterladen",
   "COLLECTION_MISSING": "Keine Vokabelsammlungen gefunden",
-  "GO_ON": "Weiter"
+  "GO_ON": "Weiter",
+  "COLLECTIONS": "Sammlungen",
+  "LEARNED": "gelernt",
+  "OPEN": "offen",
+  "IMPRINT": "Impressum",
+  "BJOERN_GLAWE": "Björn Glawe"
 }

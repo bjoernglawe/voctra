@@ -1,0 +1,51 @@
+.feature-grid {
+    display: grid;
+    max-width: 600px;
+    grid-template-columns: 1fr 1fr;
+    padding: 5px;
+    margin: auto;
+
+    .feature-card-half {
+        position: relative;
+        margin: 5px;
+        background-color: var(--ion-card-background);
+        padding: 5px;
+        border-radius: 6px;
+        height: 100px;
+        overflow: hidden;
+        box-shadow: rgb(0 0 0 / 20%) 0px 3px 1px -2px, rgb(0 0 0 / 14%) 0px 2px 2px 0px,
+            rgb(0 0 0 / 12%) 0px 1px 5px 0px;
+
+        .feature-number {
+            z-index: 3;
+            margin: 5px 0 0 10px;
+            font-size: 45px;
+        }
+
+        .feature-text {
+            z-index: 2;
+            margin: 5px 0 0 10px;
+            font-size: 25px;
+        }
+
+        .feature-icon {
+            position: absolute;
+            font-size: 40px;
+            color: var(--ion-color-step-100);
+            z-index: 1;
+            margin: 0;
+            right: 5px;
+            top: 5px;
+        }
+
+        .feature-title {
+            position: absolute;
+            font-size: 32px;
+            color: var(--ion-color-step-250);
+            z-index: 0;
+            margin: 0;
+            right: 0;
+            bottom: 0;
+        }
+    }
+}

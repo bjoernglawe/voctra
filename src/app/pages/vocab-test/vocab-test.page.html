@@ -17,30 +17,28 @@
 
 <ion-content [fullscreen]="true" (keyup.enter)="enterKeyPressed()">
   <div class="training-container">
-    <ion-list>
-      <!-- LANGUAGE ORDER -->
-      <ion-item button (click)="changeOrder()">
-        <div class="test-order">
-          <div *ngIf="settings.order">{{ 'WORD' | translate }} <div class="language-word">{{
-              getCardLanguage(currentCard)
-              }}</div>
-          </div>
-          <div *ngIf="!settings.order">{{ 'TRANSLATION' | translate }} <div class="language-word">{{
-              getCardTransLanguage(currentCard) }}</div>
-          </div>
-          <div class="test-order-symbol">
-            <ion-icon name="swap-horizontal-outline"></ion-icon>
-          </div>
-          <div *ngIf="settings.order">{{ 'TRANSLATION' | translate }} <div class="language-word">{{
-              getCardTransLanguage(currentCard) }}</div>
-          </div>
-          <div *ngIf="!settings.order">{{ 'WORD' | translate }} <div class="language-word">{{
-              getCardLanguage(currentCard)
-              }}</div>
-          </div>
+    <!-- LANGUAGE ORDER -->
+    <ion-item button (click)="changeOrder()">
+      <div class="test-order">
+        <div *ngIf="settings.order">{{ 'WORD' | translate }} <div class="language-word">{{
+            getCardLanguage(currentCard)
+            }}</div>
         </div>
-      </ion-item>
-    </ion-list>
+        <div *ngIf="!settings.order">{{ 'TRANSLATION' | translate }} <div class="language-word">{{
+            getCardTransLanguage(currentCard) }}</div>
+        </div>
+        <div class="test-order-symbol">
+          <ion-icon name="swap-horizontal-outline"></ion-icon>
+        </div>
+        <div *ngIf="settings.order">{{ 'TRANSLATION' | translate }} <div class="language-word">{{
+            getCardTransLanguage(currentCard) }}</div>
+        </div>
+        <div *ngIf="!settings.order">{{ 'WORD' | translate }} <div class="language-word">{{
+            getCardLanguage(currentCard)
+            }}</div>
+        </div>
+      </div>
+    </ion-item>
 
     <!-- VOCAB-CARD -->
     <ng-container *ngIf="currentCard">

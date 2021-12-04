@@ -10,11 +10,9 @@ import { OverviewPageRoutingModule } from './overview.routes';
 
 @NgModule({
   imports: [
-    IonicModule,
-    CommonModule,
+    SharedModule,
     FormsModule,
     OverviewPageRoutingModule,
-    SharedModule,
     CreateNewFabModule,
   ],
   declarations: [OverviewPage]

@@ -15,8 +15,39 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
-  
+  <div class="feature-grid ion-activatable ripple-parent">
+    <div class="feature-card-half">
+      <p class="feature-number">{{ collectionCount }}</p>
+      <p class="feature-title">{{ 'COLLECTIONS' | translate }}</p>
+      <ion-icon class="feature-icon" name="reader-outline"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+    <div class="feature-card-half ion-activatable ripple-parent">
+      <p class="feature-number">{{ vocabularyCount }}</p>
+      <p class="feature-title">{{ 'VOCABULARY' | translate }}</p>
+      <ion-icon class="feature-icon" name="language-outline"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+    <div class="feature-card-half ion-activatable ripple-parent">
+      <p class="feature-number">{{ learnedCount }}</p>
+      <p class="feature-title">{{ 'LEARNED' | translate }}</p>
+      <ion-icon class="feature-icon" name="checkmark-circle-outline"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+    <div class="feature-card-half ion-activatable ripple-parent">
+      <p class="feature-number">{{ openCount }}</p>
+      <p class="feature-title">{{ 'OPEN' | translate }}</p>
+      <ion-icon class="feature-icon" name="close-circle-outline"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+    <div class="feature-card-half ion-activatable ripple-parent">
+      <p class="feature-text"><a href="https://bjoernglawe.de/impressum/" target="_blank">{{ 'BJOERN_GLAWE' | translate }}</a></p>
+      <p class="feature-title">{{ 'IMPRINT' | translate }}</p>
+      <ion-icon class="feature-icon" name="accessibility-outline"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+  </div>
+
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <create-new-fab></create-new-fab>
