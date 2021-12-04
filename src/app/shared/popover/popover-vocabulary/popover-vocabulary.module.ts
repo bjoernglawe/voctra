@@ -3,7 +3,6 @@ import { IonicModule } from '@ionic/angular';
 import { SharedModule } from '../../shared.module';
 import { PopoverVocabularyComponent } from './popover-vocabulary.component';
 
-
 @NgModule({
   declarations: [PopoverVocabularyComponent],
   imports: [

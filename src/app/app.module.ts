@@ -13,8 +13,7 @@ import { VocabManagerService } from 'src/services/vocab-manager.service';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routes';
-import { AddCollectionModalComponent } from './pages/add-collection-modal/add-collection-modal.component';
-
+import { File } from '@ionic-native/file/ngx'
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -53,6 +52,7 @@ export function createTranslateLoader(http: HttpClient) {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     StorageService,
     VocabManagerService,
+    File,
   ],
   bootstrap: [
     AppComponent,

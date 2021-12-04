@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-tabs',
@@ -7,6 +8,19 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
-  constructor() {}
+  public keyboardOpen: boolean = false;
+
+  constructor(
+    private platform: Platform,
+  ) {
+    this.platform.keyboardDidShow.subscribe(ev => {
+      const { keyboardHeight } = ev;
+      this.keyboardOpen = true;
+    });
+
+    this.platform.keyboardDidHide.subscribe(() => {
+      this.keyboardOpen = false;
+    });
+  }
 
 }

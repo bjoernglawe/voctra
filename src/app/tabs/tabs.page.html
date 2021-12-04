@@ -19,7 +19,7 @@
 
 </ion-tabs>
 
-<ion-fab vertical="bottom" horizontal="center" slot="fixed">
+<ion-fab vertical="bottom" horizontal="center" slot="fixed" *ngIf="!keyboardOpen">
   <ion-fab-button [routerLink]="['/vocab-test']" routerLinkActive="router-link-active">
     <ion-icon name="rocket-outline"></ion-icon>
   </ion-fab-button>

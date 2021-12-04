@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FileSharer } from '@byteowls/capacitor-filesharer';
 import { Capacitor } from '@capacitor/core';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, ToastController } from '@ionic/angular';
 import { E_VocabCollection } from 'src/models/vocabulary.model';
 import { VocabManagerService } from 'src/services/vocab-manager.service';
 
@@ -17,6 +17,7 @@ export class PopoverVocabularyComponent implements OnInit {
   constructor(
     private popover: PopoverController,
     private vocabService: VocabManagerService,
+    private toastController: ToastController,
   ) { }
 
   ngOnInit(): void {
@@ -56,20 +57,29 @@ export class PopoverVocabularyComponent implements OnInit {
   }
 
 
-  public downloadAll() {
+  public async downloadAll() {
 
-    let fileName = 'voctra-data.json';
+    let fileName = 'voctraData.json';
     let jsonContent = JSON.stringify(this.collections);
 
     if (Capacitor.getPlatform() == 'android') {
+      const dataBase64 = btoa(unescape(encodeURIComponent(jsonContent)));
+
       FileSharer.share({
         filename: fileName,
-        base64Data: btoa(jsonContent),
+        base64Data: dataBase64,
         contentType: 'application/json'
       }).then(() => {
         this.popover.dismiss();
-      }).catch(error => {
-        console.error("File sharing failed", JSON.stringify(error));
+      }).catch(async error => {
+        if (error) {
+          const toast = await this.toastController.create({
+            message: 'Export failed!' + JSON.stringify(error),
+            color: 'danger',
+            duration: 2000,
+          });
+          toast.present();
+        }
       });
     } else if (Capacitor.getPlatform() == 'web') {
       var blob = new Blob([jsonContent]);
@@ -80,6 +90,13 @@ export class PopoverVocabularyComponent implements OnInit {
       a.click();
       document.body.removeChild(a);
       this.popover.dismiss();
+    } else {
+      const toast = await this.toastController.create({
+        message: 'Export failed! (No export option on your device defined)',
+        color: 'danger',
+        duration: 2000
+      });
+      toast.present();
     }
   }
 }
