@@ -3,6 +3,14 @@
     <ion-title>
       {{ 'OVERVIEW' | translate }}
     </ion-title>
+
+    <!-- Vocabulary-List -->
+    <ion-buttons slot="primary">
+      <ion-button (click)="toggleTheme()">
+        <ion-icon slot="icon-only" *ngIf="isDark" name="moon-outline"></ion-icon>
+        <ion-icon slot="icon-only" *ngIf="isDefault" name="sunny-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
