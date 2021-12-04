@@ -33,5 +33,6 @@
   "COLLECTION_DELETED": "Vokabelsammlung gelöscht!",
   "UPLOAD_COLLECTION": "Hochladen",
   "DOWNLOAD_ALL": "Herunterladen",
-  "COLLECTION_MISSING": "Keine Vokabelsammlungen gefunden"
+  "COLLECTION_MISSING": "Keine Vokabelsammlungen gefunden",
+  "GO_ON": "Weiter"
 }

@@ -33,5 +33,6 @@
   "COLLECTION_DELETED": "Vocabulary-Collection deleted!",
   "UPLOAD_COLLECTION": "Upload",
   "DOWNLOAD_ALL": "Download",
-  "COLLECTION_MISSING": "No Vocabulary Collections found"
+  "COLLECTION_MISSING": "No Vocabulary Collections found",
+  "GO_ON": "Go On"
 }

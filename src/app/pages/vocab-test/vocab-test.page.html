@@ -15,7 +15,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" (keyup.enter)="enterKeyPressed()">
   <div class="training-container">
     <ion-list>
       <!-- LANGUAGE ORDER -->
@@ -76,6 +76,12 @@
       </ion-item>
     </ng-container>
   </div>
+
+  <!-- START-BUTTON -->
+  <div class="start-center-button ion-activatable ripple-parent" button (click)="selectNextCard()" *ngIf="!currentCard">
+    <ion-ripple-effect></ion-ripple-effect>
+    <p>{{ 'START_NEW_TEST' | translate }}</p>
+  </div>
 </ion-content>
 
 <ion-footer>
@@ -96,8 +102,13 @@
     <ion-button *ngIf="!currentCard" (click)="selectNextCard()" fill="full">
       {{ 'START_NEW_TEST' | translate }}
     </ion-button>
-    <ion-button *ngIf="currentCard" (click)="checkTest()" [disabled]="showSuccess || showWrong" fill="full">
+    <ion-button *ngIf="currentCard && !showWrong" (click)="checkTest()" [disabled]="showSuccess || showWrong"
+      fill="full">
       {{ "CHECK" | translate }}
+      <ion-icon name="send-outline" slot="end"></ion-icon>
+    </ion-button>
+    <ion-button *ngIf="showWrong" (click)="selectNextCard()" fill="full">
+      {{ "GO_ON" | translate }}
       <ion-icon name="send-outline" slot="end"></ion-icon>
     </ion-button>
   </ion-toolbar>

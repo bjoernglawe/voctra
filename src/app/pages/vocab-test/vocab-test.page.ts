@@ -75,6 +75,8 @@ export class VocabTestPage {
   }
 
   public selectNextCard() {
+    this.showSuccess = false;
+    this.showWrong = false;
     const max = this.vocabCards.length;
     const ranIndex = Math.round(Math.random() * (max - 1));
     this.currentCard = this.vocabCards[ranIndex];
@@ -136,6 +138,8 @@ export class VocabTestPage {
   }
 
   public checkTest() {
+    // this.testFormGroup.get('vocWord').disable();
+    // this.testFormGroup.get('vocTrans').disable();
     if (this.settings.order) { // TRANSLATION CHECK
       if (this.testFormGroup.get('vocTrans').value &&
         (this.testFormGroup.get('vocTrans').value as string).toLowerCase() == this.currentCard.translation.toLowerCase()) {
@@ -161,11 +165,11 @@ export class VocabTestPage {
     }
     // SAVE & NEXT
     this.vocabService.saveVocabulary();
-    setTimeout(() => {
-      this.showSuccess = false;
-      this.showWrong = false;
-      this.selectNextCard();
-    }, 2000)
+    if (this.showSuccess) {
+      setTimeout(() => {
+        this.selectNextCard();
+      }, 2000)
+    }
   }
 
   public changeOrder() {
@@ -189,5 +193,13 @@ export class VocabTestPage {
 
   public getArrayOfCorrect(rowCounter: number): Array<any> {
     return Array(rowCounter);
+  }
+
+  public enterKeyPressed() {
+    if (!this.currentCard || this.showWrong) {
+      this.selectNextCard();
+    } else {
+      this.checkTest();
+    }
   }
 }
