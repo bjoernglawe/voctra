@@ -72,12 +72,6 @@
   <ion-list *ngIf="showVocList && selectedCollection && !showSearchResults">
     <ng-container *ngFor="let vocCard of selectedCollection.vocabulary">
       <ion-item-sliding>
-        <ion-item-options side="start">
-          <ion-item-option (click)="undefined" expandable>
-            <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
-          </ion-item-option>
-        </ion-item-options>
-
         <ion-item matRipple class="ion-activatable ripple-parent">
           <ion-ripple-effect></ion-ripple-effect>
           <div class="vocab-item-grid">
@@ -89,8 +83,8 @@
         </ion-item>
 
         <ion-item-options side="end">
-          <ion-item-option color="danger" (click)="undefined" expandable>
-            <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+          <ion-item-option (click)="undefined" expandable>
+            <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
           </ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
