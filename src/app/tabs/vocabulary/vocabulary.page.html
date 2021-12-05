@@ -72,7 +72,7 @@
   <ion-list *ngIf="showVocList && selectedCollection && !showSearchResults">
     <ng-container *ngFor="let vocCard of selectedCollection.vocabulary">
       <ion-item-sliding>
-        <ion-item matRipple class="ion-activatable ripple-parent">
+        <ion-item matRipple class="ion-activatable ripple-parent" (click)="openVocabInfoModal(vocCard)">
           <ion-ripple-effect></ion-ripple-effect>
           <div class="vocab-item-grid">
             <div class="vocab-word">{{vocCard.word}}</div>
@@ -94,7 +94,7 @@
   <!-- Search-Results -->
   <ion-list *ngIf="showSearchResults">
     <ng-container *ngFor="let vocCard of selectedCards">
-      <ion-item matRipple class="ion-activatable ripple-parent">
+      <ion-item matRipple class="ion-activatable ripple-parent" (click)="openVocabInfoModal(vocCard)">
         <ion-ripple-effect></ion-ripple-effect>
         <div class="vocab-item-grid">
           <div class="vocab-word">{{vocCard.word}}</div>

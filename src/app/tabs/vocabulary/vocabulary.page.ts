@@ -3,8 +3,8 @@ import { AlertController, ModalController, Platform, PopoverController, ToastCon
 import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { AddCollectionModalComponent } from 'src/app/pages/add-collection-modal/add-collection-modal.component';
-import { AddVocabModalComponent } from 'src/app/pages/add-vocab-modal/add-vocab-modal.component';
+import { VocabInfoModalComponent } from 'src/app/pages/vocab-info-modal/vocab-info-modal.component';
+import { VocabInfoModalModule } from 'src/app/pages/vocab-info-modal/vocab-info-modal.module';
 import { PopoverCollectionComponent } from 'src/app/shared/popover/popover-collection/popover-collection.component';
 import { PopoverVocabularyComponent } from 'src/app/shared/popover/popover-vocabulary/popover-vocabulary.component';
 import { E_VocabCard, E_VocabCollection } from 'src/models/vocabulary.model';
@@ -35,6 +35,7 @@ export class VocabularyPage {
     private translateService: TranslateService,
     private alertController: AlertController,
     private toastController: ToastController,
+    private modalController: ModalController,
   ) {
     this.vocabService.getAllVocabulary()
       .pipe(takeUntil(this.ngUnsubscribe))
@@ -155,5 +156,16 @@ export class VocabularyPage {
   public closeSearchbar() {
     this.showSearchResults = false;
     this.showSearch = false;
+  }
+  
+  public async openVocabInfoModal(vocab: E_VocabCard) {
+    const modal = await this.modalController.create({
+      component: VocabInfoModalComponent,
+      componentProps: {
+        vocab: vocab,
+        collection: this.collections.find(coll => coll.id == vocab.collectionId),
+      }
+    });
+    return await modal.present();
   }
 }

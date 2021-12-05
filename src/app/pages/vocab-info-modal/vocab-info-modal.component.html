@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>
+			{{ collection.title }} - {{ vocab.word }}
+		</ion-title>
+
+		<ion-buttons slot="primary">
+			<ion-button (click)="closeModal()">
+				<ion-icon slot="icon-only" name="close-outline"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-list>
+        <ion-item>
+            <div class="vocab-item-grid">
+                <div class="item-grid-title">{{ collection.language }}</div>
+                <div class="item-grid-variable"> {{ vocab.word }} </div>
+            </div>
+        </ion-item>
+        <ion-item>
+            <div class="vocab-item-grid">
+                <div class="item-grid-title">{{ 'PRONUNCIATION' | translate }}</div>
+                <div class="item-grid-variable">{{ vocab.pronunciation }}</div>
+            </div>
+        </ion-item>
+        <ion-item>
+            <div class="vocab-item-grid">
+                <div class="item-grid-title">{{ collection.translateLang }}</div>
+                <div class="item-grid-variable">{{ vocab.translation }}</div>
+            </div>
+        </ion-item>
+        <ion-item>
+            <div class="vocab-item-grid">
+                <div class="item-grid-title">{{ 'DESCRIPTION' | translate }}</div>
+                <div class="item-grid-variable">{{ vocab.description }}</div>
+            </div>
+        </ion-item>
+    </ion-list>
+</ion-content>

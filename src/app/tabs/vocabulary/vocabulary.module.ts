@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { AddCollectionModalModule } from 'src/app/pages/add-collection-modal/add-collection-modal.module';
 import { AddVocabModalModule } from 'src/app/pages/add-vocab-modal/add-vocab-modal.module';
+import { VocabInfoModalModule } from 'src/app/pages/vocab-info-modal/vocab-info-modal.module';
 import { CreateNewFabModule } from 'src/app/shared/fab/create-new-fab/create-new-fab.module';
 import { PopoverCollectionModule } from 'src/app/shared/popover/popover-collection/popover-collection.module';
 import { PopoverVocabularyModule } from 'src/app/shared/popover/popover-vocabulary/popover-vocabulary.module';
@@ -25,6 +26,7 @@ import { VocabularyPageRoutingModule } from './vocabulary.routes';
     AddVocabModalModule,
     AddCollectionModalModule,
     CreateNewFabModule,
+    VocabInfoModalModule,
   ],
   declarations: [VocabularyPage]
 })
