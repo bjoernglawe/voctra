@@ -39,5 +39,9 @@
   "LEARNED": "gelernt",
   "OPEN": "offen",
   "IMPRINT": "Impressum",
-  "BJOERN_GLAWE": "Björn Glawe"
+  "BJOERN_GLAWE": "Björn Glawe",
+  "MOST_CORRECT_TRANS": "richtig",
+  "MOST_WRONG_TRANS": "falsch",
+  "MOST_CORRECT_WORD": "richtig",
+  "MOST_WRONG_WORD": "falsch"
 }

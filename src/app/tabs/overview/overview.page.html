@@ -17,27 +17,62 @@
 <ion-content [fullscreen]="true">
   <div class="feature-grid ion-activatable ripple-parent">
     <div class="feature-card-half">
-      <p class="feature-number">{{ collectionCount }}</p>
+      <p class="feature-number">{{ collectionCountTmp }}</p>
       <p class="feature-title">{{ 'COLLECTIONS' | translate }}</p>
       <ion-icon class="feature-icon" name="reader-outline"></ion-icon>
       <ion-ripple-effect></ion-ripple-effect>
     </div>
     <div class="feature-card-half ion-activatable ripple-parent">
-      <p class="feature-number">{{ vocabularyCount }}</p>
+      <p class="feature-number">{{ vocabularyCountTmp }}</p>
       <p class="feature-title">{{ 'VOCABULARY' | translate }}</p>
       <ion-icon class="feature-icon" name="language-outline"></ion-icon>
       <ion-ripple-effect></ion-ripple-effect>
     </div>
     <div class="feature-card-half ion-activatable ripple-parent">
-      <p class="feature-number">{{ learnedCount }}</p>
+      <p class="feature-number">{{ learnedCountTmp }}</p>
       <p class="feature-title">{{ 'LEARNED' | translate }}</p>
       <ion-icon class="feature-icon" name="checkmark-circle-outline"></ion-icon>
       <ion-ripple-effect></ion-ripple-effect>
     </div>
     <div class="feature-card-half ion-activatable ripple-parent">
-      <p class="feature-number">{{ openCount }}</p>
+      <p class="feature-number">{{ openCountTmp }}</p>
       <p class="feature-title">{{ 'OPEN' | translate }}</p>
       <ion-icon class="feature-icon" name="close-circle-outline"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+    <div class="feature-card-half ion-activatable ripple-parent">
+      <p class="feature-number">{{ trainCountTmp }}</p>
+      <p class="feature-title">{{ 'TRAINING' | translate }}</p>
+      <ion-icon class="feature-icon" name="rocket-outline"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+    <div></div>
+    <div class="feature-card-half ion-activatable ripple-parent" *ngIf="mostCorrectTransTmp">
+      <p class="feature-text">{{ mostCorrectTransTmp.word }}</p>
+      <p class="feature-text">{{ mostCorrectTransTmp.translation }}</p>
+      <p class="feature-title">{{ 'MOST_CORRECT_TRANS' | translate }}</p>
+      <ion-icon class="feature-icon" name="language-outline"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+    <div class="feature-card-half ion-activatable ripple-parent" *ngIf="mostWrongTransTmp">
+      <p class="feature-text">{{ mostWrongTransTmp.word }}</p>
+      <p class="feature-text">{{ mostWrongTransTmp.translation }}</p>
+      <p class="feature-title">{{ 'MOST_WRONG_TRANS' | translate }}</p>
+      <ion-icon class="feature-icon" name="language-outline"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+    <div class="feature-card-half ion-activatable ripple-parent" *ngIf="mostCorrectWordTmp">
+      <p class="feature-text">{{ mostCorrectWordTmp.translation }}</p>
+      <p class="feature-text">{{ mostCorrectWordTmp.word }}</p>
+      <p class="feature-title">{{ 'MOST_CORRECT_WORD' | translate }}</p>
+      <ion-icon class="feature-icon" name="language-outline"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+    <div class="feature-card-half ion-activatable ripple-parent" *ngIf="mostWrongWordTmp">
+      <p class="feature-text">{{ mostWrongWordTmp.translation }}</p>
+      <p class="feature-text">{{ mostWrongWordTmp.word }}</p>
+      <p class="feature-title">{{ 'MOST_WRONG_WORD' | translate }}</p>
+      <ion-icon class="feature-icon" name="language-outline"></ion-icon>
       <ion-ripple-effect></ion-ripple-effect>
     </div>
     <div class="feature-card-half ion-activatable ripple-parent">
