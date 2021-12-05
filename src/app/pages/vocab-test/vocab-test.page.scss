@@ -1,8 +1,12 @@
-.test-order {
-    display: grid;
-    width: 100%;
-    grid-template-columns: 1fr 1fr 1fr;
-    text-align: center;
+.test-order-item {
+    margin-top: 2px;
+    --background: var(--ion-background-color);
+    .test-order {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 1fr 1fr 1fr;
+        text-align: center;
+    }
 }
 
 .test-order-symbol {
@@ -15,17 +19,25 @@
 }
 
 .training-card {
+    &.card-correct {
+        margin: 9px;
+        border: solid 1px var(--ion-color-success);
+    }
 
+    &.card-wrong {
+        margin: 9px;
+        border: solid 1px var(--ion-color-danger);
+    }
 }
 
 .voc-input {
     --color: var(--ion-text-color);
 
-    &:not([aria-disabled=true]) {
+    &:not([aria-disabled="true"]) {
         border-bottom: solid 0.5px var(--ion-color-step-500);
     }
 
-    ::ng-deep{
+    ::ng-deep {
         .native-input[disabled].sc-ion-input-md {
             opacity: 1;
         }
@@ -100,7 +112,7 @@
     opacity: 0.3;
     filter: blur(4px);
     transition: filter 0.2s ease, opacity 0.2s ease;
-    &:hover{
+    &:hover {
         opacity: 1;
         filter: none;
     }
@@ -116,5 +128,26 @@
         height: 5px;
         background-color: var(--ion-color-success);
         border-right: solid 1px var(--ion-background-color);
+    }
+}
+
+@keyframes load-animation {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+.time-progress-bar {
+    position: absolute;
+    bottom: 0px;
+    z-index: 20;
+    left: 0;
+    height: 3px;
+    animation: load-animation 1.5s linear infinite;
+    &.correct {
+        background-color: var(--ion-color-success);
     }
 }

@@ -168,7 +168,7 @@ export class VocabTestPage {
     if (this.showSuccess) {
       setTimeout(() => {
         this.selectNextCard();
-      }, 2000)
+      }, 1500)
     }
   }
 

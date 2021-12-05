@@ -41,5 +41,18 @@
                 <div class="item-grid-variable">{{ vocab.description }}</div>
             </div>
         </ion-item>
+
+        <ion-item>
+            <div class="vocab-item-grid">
+                <div class="item-grid-title">{{ 'TRANSLATION_CORRECT' | translate }}</div>
+                <div class="item-grid-variable">{{ vocab.transCorrect }} / {{ vocab.transCorrect + vocab.transWrong }}</div>
+            </div>
+        </ion-item>
+        <ion-item>
+            <div class="vocab-item-grid">
+                <div class="item-grid-title">{{ 'WORD_CORRECT' | translate }}</div>
+                <div class="item-grid-variable">{{ vocab.wordCorrect }} / {{ vocab.wordCorrect + vocab.wordWrong }}</div>
+            </div>
+        </ion-item>
     </ion-list>
 </ion-content>

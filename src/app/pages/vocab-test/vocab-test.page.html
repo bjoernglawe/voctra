@@ -18,7 +18,7 @@
 <ion-content [fullscreen]="true" (keyup.enter)="enterKeyPressed()">
   <div class="training-container">
     <!-- LANGUAGE ORDER -->
-    <ion-item button (click)="changeOrder()">
+    <ion-item class="test-order-item" button (click)="changeOrder()" lines="none">
       <div class="test-order">
         <div *ngIf="settings.order">{{ 'WORD' | translate }} <div class="language-word">{{
             getCardLanguage(currentCard)
@@ -43,20 +43,20 @@
     <!-- VOCAB-CARD -->
     <ng-container *ngIf="currentCard">
       <form [formGroup]="testFormGroup">
-        <ion-card class="training-card">
+        <ion-card class="training-card" [class.card-correct]="showSuccess" [class.card-wrong]="showWrong">
           <ion-card-content>
             <ion-input #vocWord class="voc-input voc-word-input" [class.hideCheck]="showWrong || showSuccess"
               formControlName="vocWord">
               <p class="correct-word" *ngIf="showWrong || showSuccess">{{currentCard.word}}</p>
             </ion-input>
-            <ion-input class="voc-input voc-pron-input" [class.visibilityHide]="!settings.showPron"
+            <ion-input class="voc-input voc-pron-input" [class.visibilityHide]="!settings.showPron && !(showSuccess || showWrong)"
               formControlName="vocPron" [disabled]="true">
             </ion-input>
             <ion-input #vocTrans class="voc-input voc-trans-input" [class.hideCheck]="showWrong || showSuccess"
               formControlName="vocTrans">
               <p class="correct-translation" *ngIf="showWrong || showSuccess">{{currentCard.translation}}</p>
             </ion-input>
-            <ion-textarea [class.visibilityHide]="!settings.showDesc" class="voc-input voc-desc-input"
+            <ion-textarea [class.visibilityHide]="!settings.showDesc && !(showSuccess || showWrong)" class="voc-input voc-desc-input"
               formControlName="vocDesc" type="textarea" [disabled]="true">
             </ion-textarea>
           </ion-card-content>
@@ -110,4 +110,9 @@
       <ion-icon name="send-outline" slot="end"></ion-icon>
     </ion-button>
   </ion-toolbar>
+
+  <!-- TIME-PROGRESS -->
+  <ng-container>
+    <div [class.time-progress-bar]="showSuccess" class="correct"></div>
+  </ng-container>
 </ion-footer>
