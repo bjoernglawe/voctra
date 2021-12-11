@@ -1,8 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { NavController, Platform, PopoverController } from '@ionic/angular';
+import { ModalController, NavController, Platform, PopoverController } from '@ionic/angular';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { CollectionSelectorModalComponent } from 'src/app/shared/modal/collection-selector-modal/collection-selector-modal.component';
 import { PopoverTestComponent } from 'src/app/shared/popover/popover-test/popover-test.component';
 import { E_VocabCard, E_VocabCollection } from 'src/models/vocabulary.model';
 import { VocabManagerService } from 'src/services/vocab-manager.service';
@@ -17,6 +18,7 @@ export class VocabTestPage {
   private ngUnsubscribe: Subject<void> = new Subject();
 
   public vocabulary: E_VocabCollection[] = [];
+  public selectedVocabulary: E_VocabCollection[] = [];
   public vocabCards: E_VocabCard[] = [];
   public currentCard: E_VocabCard;
 
@@ -50,15 +52,16 @@ export class VocabTestPage {
     private popoverController: PopoverController,
     private platform: Platform,
     private navCtrl: NavController,
+    private modalController: ModalController,
   ) {
     this.vocabService.getAllVocabulary()
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((res) => {
         this.vocabulary = res;
-        this.vocabCards = [];
-        this.vocabulary.forEach(collection => {
-          this.vocabCards = this.vocabCards.concat(collection.vocabulary);
-        });
+        if (this.selectedVocabulary.length <= 0) {
+          this.selectedVocabulary = this.vocabulary;
+        }
+        this.initVocabCards();
       });
     this.platform.backButton.subscribeWithPriority(10, () => {
       this.navCtrl.back()
@@ -72,6 +75,14 @@ export class VocabTestPage {
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  public initVocabCards(): void {
+    this.vocabCards = [];
+    this.selectedVocabulary.forEach(collection => {
+      this.vocabCards = this.vocabCards.concat(collection.vocabulary);
+    });
+    console.log(this.vocabCards);
   }
 
   public selectNextCard() {
@@ -200,6 +211,33 @@ export class VocabTestPage {
       this.selectNextCard();
     } else {
       this.checkTest();
+    }
+  }
+
+  public async presentCollectionModal(event: Event) {
+    let vocabWithSelect: (E_VocabCollection & { selected?: boolean })[] = this.vocabulary;
+    vocabWithSelect.forEach(coll => {
+      coll.selected = this.selectedVocabulary.find(selColl => selColl.id == coll.id) != undefined;
+    });
+    const modal = await this.modalController.create({
+      component: CollectionSelectorModalComponent,
+      animated: true,
+      cssClass: 'small-modal',
+      backdropDismiss: true,
+      componentProps: {
+        allVocabulary: vocabWithSelect,
+      }
+    });
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+    if (data?.saved) {
+      this.selectedVocabulary = [];
+      data.selectedVocabulary.forEach(selColl => {
+        if (selColl.selected) {
+          this.selectedVocabulary.push(this.vocabulary.find(coll => coll.id == selColl.id));
+        }
+      })
+      this.initVocabCards();
     }
   }
 }

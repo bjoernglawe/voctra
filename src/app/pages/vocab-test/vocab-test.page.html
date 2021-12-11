@@ -8,6 +8,9 @@
     </ion-title>
 
     <ion-buttons slot="primary">
+      <ion-button (click)="presentCollectionModal($event)">
+        <ion-icon name="duplicate-outline"></ion-icon>
+      </ion-button>
       <ion-button (click)="presentTestPopover($event)">
         <ion-icon name="ellipsis-vertical-outline"></ion-icon>
       </ion-button>
