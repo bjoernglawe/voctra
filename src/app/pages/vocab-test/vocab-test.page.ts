@@ -82,7 +82,6 @@ export class VocabTestPage {
     this.selectedVocabulary.forEach(collection => {
       this.vocabCards = this.vocabCards.concat(collection.vocabulary);
     });
-    console.log(this.vocabCards);
   }
 
   public selectNextCard() {

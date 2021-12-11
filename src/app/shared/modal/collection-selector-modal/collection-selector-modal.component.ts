@@ -24,8 +24,4 @@ export class CollectionSelectorModalComponent implements OnInit {
       'saved': true,
     });
   }
-
-  public test(): void {
-    console.log();
-  }
 }
