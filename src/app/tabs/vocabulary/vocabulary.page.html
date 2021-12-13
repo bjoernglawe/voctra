@@ -46,7 +46,7 @@
 
   <ng-container *ngIf="showSearch">
     <ion-searchbar class="searchbar" showCancelButton="focus" placeholder="{{ 'SEARCH' | translate }}"
-      (ionChange)="setSearch($event)" (ionCancel)="closeSearchbar()"></ion-searchbar>
+      (ionChange)="setSearch($event)" (ionCancel)="closeSearchbar()" debounce="500"></ion-searchbar>
   </ng-container>
 
   <!-- Vocabulary-Collections -->
@@ -93,6 +93,7 @@
           <div class="vocab-translation">{{vocCard.translation}}</div>
           <div class="vocab-pronunciation" *ngIf="showVocMore">{{vocCard.pronunciation}}</div>
           <div class="vocab-description" *ngIf="showVocMore">{{vocCard.description}}</div>
+          <div class="vocab-collection-title"> {{ getCollection(vocCard.collectionId) }} </div>
         </div>
       </ion-item>
     </ng-container>

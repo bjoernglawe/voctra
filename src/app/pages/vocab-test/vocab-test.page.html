@@ -10,6 +10,9 @@
     <ion-buttons slot="primary">
       <ion-button (click)="presentCollectionModal($event)">
         <ion-icon name="duplicate-outline"></ion-icon>
+        <ion-badge color="light" mode="ios" style="transform: scale(0.8);">
+          {{ selectedVocabulary?.length }}
+        </ion-badge>
       </ion-button>
       <ion-button (click)="presentTestPopover($event)">
         <ion-icon name="ellipsis-vertical-outline"></ion-icon>

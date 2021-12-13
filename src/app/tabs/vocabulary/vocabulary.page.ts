@@ -168,4 +168,8 @@ export class VocabularyPage {
     });
     return await modal.present();
   }
+
+  public getCollection(collId: string): string {
+    return this.collections.find(coll => coll.id == collId).title;
+  }
 }
