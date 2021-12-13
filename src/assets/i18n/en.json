@@ -44,5 +44,9 @@
   "MOST_WRONG_TRANS": "wrong",
   "MOST_CORRECT_WORD": "correct",
   "MOST_WRONG_WORD": "wrong",
-  "SAVED_CHANGES": "Changes saved"
+  "SAVED_CHANGES": "Changes saved",
+  "SUCCESS": "Correct",
+  "WRONG": "Wrong",
+  "TRANSLATION_CORRECT": "correct translations",
+  "WORD_CORRECT": "correct foreign words"
 }

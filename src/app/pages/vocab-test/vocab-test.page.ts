@@ -28,6 +28,9 @@ export class VocabTestPage {
   @ViewChild('vocWord') vocWord;
   @ViewChild('vocTrans') vocTrans;
 
+  // cash
+  private removableBeforeWasZero: boolean = false;
+
   public settings: {
     showPron: boolean,
     showDesc: boolean,
@@ -142,7 +145,10 @@ export class VocabTestPage {
 
   private rowCounterRemove(counter: number): number {
     if (counter > 0) {
+      this.removableBeforeWasZero = false;
       return (counter -= 1);
+    } else {
+      this.removableBeforeWasZero = true;
     }
     return counter;
   }
@@ -180,6 +186,25 @@ export class VocabTestPage {
         this.selectNextCard();
       }, 1500)
     }
+  }
+
+  public undoneWrongCheck() {
+    if (this.settings.order) {
+      this.currentCard.transCorrect++;
+      if (!this.removableBeforeWasZero) this.currentCard.transCorrectRow = this.rowCounterAdd(this.currentCard.transCorrectRow);
+      this.currentCard.transCorrectRow = this.rowCounterAdd(this.currentCard.transCorrectRow);
+    } else {
+      this.currentCard.wordWrong++;
+      if (!this.removableBeforeWasZero) this.currentCard.wordCorrectRow = this.rowCounterAdd(this.currentCard.wordCorrectRow);
+      this.currentCard.wordCorrectRow = this.rowCounterAdd(this.currentCard.wordCorrectRow);
+    }
+    this.showSuccess = true;
+    this.showWrong = false;
+    // SAVE & NEXT
+    this.vocabService.saveVocabulary();
+    setTimeout(() => {
+      this.selectNextCard();
+    }, 1500)
   }
 
   public changeOrder() {

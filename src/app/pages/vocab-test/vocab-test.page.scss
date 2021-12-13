@@ -151,3 +151,12 @@
         background-color: var(--ion-color-success);
     }
 }
+
+.wrong-check-buttons {
+    display: grid;
+    grid-template-columns: 17% 1px auto;
+    .button-divider {
+        height: 100%;
+        background-color: var(--color);
+    }
+}
