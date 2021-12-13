@@ -43,5 +43,6 @@
   "MOST_CORRECT_TRANS": "correct",
   "MOST_WRONG_TRANS": "wrong",
   "MOST_CORRECT_WORD": "correct",
-  "MOST_WRONG_WORD": "wrong"
+  "MOST_WRONG_WORD": "wrong",
+  "SAVED_CHANGES": "Changes saved"
 }

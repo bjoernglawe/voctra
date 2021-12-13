@@ -1,58 +1,78 @@
 <ion-header [translucent]="true">
-	<ion-toolbar>
-		<ion-buttons slot="start">
-			<ion-back-button></ion-back-button>
-		</ion-buttons>
-		<ion-title>
-			{{ collection.title }} - {{ vocab.word }}
-		</ion-title>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            {{ collection.title }} - {{ vocab.word }}
+        </ion-title>
 
-		<ion-buttons slot="primary">
-			<ion-button (click)="closeModal()">
-				<ion-icon slot="icon-only" name="close-outline"></ion-icon>
-			</ion-button>
-		</ion-buttons>
-	</ion-toolbar>
+        <ion-buttons slot="primary">
+            <ion-button (click)="editVocab()" *ngIf="!editMode">
+                <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
+            </ion-button>
+            <ion-button (click)="saveChanges()" *ngIf="editMode">
+                <ion-icon slot="icon-only" name="save-outline"></ion-icon>
+            </ion-button>
+            <ion-button (click)="closeModal()">
+                <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-    <ion-list>
-        <ion-item>
-            <div class="vocab-item-grid">
-                <div class="item-grid-title">{{ collection.language }}</div>
-                <div class="item-grid-variable"> {{ vocab.word }} </div>
-            </div>
-        </ion-item>
-        <ion-item>
-            <div class="vocab-item-grid">
-                <div class="item-grid-title">{{ 'PRONUNCIATION' | translate }}</div>
-                <div class="item-grid-variable">{{ vocab.pronunciation }}</div>
-            </div>
-        </ion-item>
-        <ion-item>
-            <div class="vocab-item-grid">
-                <div class="item-grid-title">{{ collection.translateLang }}</div>
-                <div class="item-grid-variable">{{ vocab.translation }}</div>
-            </div>
-        </ion-item>
-        <ion-item>
-            <div class="vocab-item-grid">
-                <div class="item-grid-title">{{ 'DESCRIPTION' | translate }}</div>
-                <div class="item-grid-variable">{{ vocab.description }}</div>
-            </div>
-        </ion-item>
+    <form [formGroup]="vocabFormGroup">
+        <ion-list>
+            <ion-item>
+                <div class="vocab-item-grid">
+                    <div class="item-grid-title">{{ collection.language }}</div>
+                    <div class="item-grid-variable" *ngIf="!editMode"> {{ vocab.word }} </div>
+                    <ion-input class="voc-word-input" *ngIf="editMode" formControlName="vocWord" placeholder="{{ 'WORD' | translate }}">
+                    </ion-input>
+                </div>
+            </ion-item>
+            <ion-item>
+                <div class="vocab-item-grid">
+                    <div class="item-grid-title">{{ 'PRONUNCIATION' | translate }}</div>
+                    <div class="item-grid-variable" *ngIf="!editMode">{{ vocab.pronunciation }}</div>
+                    <ion-input class="voc-pron-input" formControlName="vocPron"
+                        placeholder="{{ 'PRONUNCIATION' | translate }}" *ngIf="editMode"></ion-input>
+                </div>
+            </ion-item>
+            <ion-item>
+                <div class="vocab-item-grid">
+                    <div class="item-grid-title">{{ collection.translateLang }}</div>
+                    <div class="item-grid-variable" *ngIf="!editMode">{{ vocab.translation }}</div>
+                    <ion-input class="voc-trans-input" formControlName="vocTrans"
+                        placeholder="{{ 'TRANSLATION' | translate }}" *ngIf="editMode"></ion-input>
+                </div>
+            </ion-item>
+            <ion-item>
+                <div class="vocab-item-grid">
+                    <div class="item-grid-title">{{ 'DESCRIPTION' | translate }}</div>
+                    <div class="item-grid-variable" *ngIf="!editMode">{{ vocab.description }}</div>
+                    <ion-textarea class="voc-desc-input" formControlName="vocDesc" type="textarea"
+                        placeholder="{{ 'DESCRIPTION' | translate }}" *ngIf="editMode">
+                    </ion-textarea>
+                </div>
+            </ion-item>
 
-        <ion-item>
-            <div class="vocab-item-grid">
-                <div class="item-grid-title">{{ 'TRANSLATION_CORRECT' | translate }}</div>
-                <div class="item-grid-variable">{{ vocab.transCorrect }} / {{ vocab.transCorrect + vocab.transWrong }}</div>
-            </div>
-        </ion-item>
-        <ion-item>
-            <div class="vocab-item-grid">
-                <div class="item-grid-title">{{ 'WORD_CORRECT' | translate }}</div>
-                <div class="item-grid-variable">{{ vocab.wordCorrect }} / {{ vocab.wordCorrect + vocab.wordWrong }}</div>
-            </div>
-        </ion-item>
-    </ion-list>
+            <ion-item>
+                <div class="vocab-item-grid">
+                    <div class="item-grid-title">{{ 'TRANSLATION_CORRECT' | translate }}</div>
+                    <div class="item-grid-variable">{{ vocab.transCorrect }} / {{ vocab.transCorrect + vocab.transWrong
+                        }}
+                    </div>
+                </div>
+            </ion-item>
+            <ion-item>
+                <div class="vocab-item-grid">
+                    <div class="item-grid-title">{{ 'WORD_CORRECT' | translate }}</div>
+                    <div class="item-grid-variable">{{ vocab.wordCorrect }} / {{ vocab.wordCorrect + vocab.wordWrong }}
+                    </div>
+                </div>
+            </ion-item>
+        </ion-list>
+    </form>
 </ion-content>
