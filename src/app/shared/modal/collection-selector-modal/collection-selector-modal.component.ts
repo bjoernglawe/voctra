@@ -20,7 +20,7 @@ export class CollectionSelectorModalComponent implements OnInit {
 
   public dismissModal(): void {
     this.modalController.dismiss({
-      'selectedVocabulary': this.allVocabulary,
+      'selectedVocabulary': this.allVocabulary.filter(coll => coll.selected).map(coll => coll.id),
       'saved': true,
     });
   }
