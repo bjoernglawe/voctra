@@ -190,11 +190,13 @@ export class VocabTestPage {
   /**
    * checks input with correct data
    * validation
+   *  - set all lower case
+   *  - remove spaces at end
    */
   public checkTest() {
     if (this.settings.order) { // TRANSLATION CHECK
       if (this.testFormGroup.get('vocTrans').value &&
-        (this.testFormGroup.get('vocTrans').value as string).toLowerCase() == this.currentCard.translation.toLowerCase()) {
+        (this.testFormGroup.get('vocTrans').value as string).toLowerCase().replace(/\s+$/, '') == this.currentCard.translation.toLowerCase()) {
         this.currentCard.transCorrect++;
         this.currentCard.transCorrectRow = this.rowCounterAdd(this.currentCard.transCorrectRow);
         this.showSuccess = true;
@@ -205,7 +207,7 @@ export class VocabTestPage {
       }
     } else {  // WORD CHECK
       if (this.testFormGroup.get('vocWord').value &&
-        (this.testFormGroup.get('vocWord').value as string).toLowerCase() == this.currentCard.word.toLowerCase()) {
+        (this.testFormGroup.get('vocWord').value as string).toLowerCase().replace(/\s+$/, '') == this.currentCard.word.toLowerCase()) {
         this.currentCard.wordCorrect++;
         this.currentCard.wordCorrectRow = this.rowCounterAdd(this.currentCard.wordCorrectRow);
         this.showSuccess = true;
