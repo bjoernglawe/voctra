@@ -48,5 +48,6 @@
   "SUCCESS": "Correct",
   "WRONG": "Wrong",
   "TRANSLATION_CORRECT": "correct translations",
-  "WORD_CORRECT": "correct foreign words"
+  "WORD_CORRECT": "correct foreign words",
+  "SEARCH": "Search"
 }

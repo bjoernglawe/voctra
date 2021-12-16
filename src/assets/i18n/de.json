@@ -48,5 +48,6 @@
   "SUCCESS": "Richtig",
   "WRONG": "Falsch",
   "TRANSLATION_CORRECT": "korrekte Übersetzungen",
-  "WORD_CORRECT": "korrekte Fremdwörter"
+  "WORD_CORRECT": "korrekte Fremdwörter",
+  "SEARCH": "Suche"
 }

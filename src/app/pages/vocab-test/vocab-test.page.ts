@@ -231,6 +231,11 @@ export class VocabTestPage {
    * input is validated as correct
    */
   public undoneWrongCheck() {
+    // all cards were saved and updated -> find updated card
+    this.currentCard = this.vocabCards.find(card => card.id == this.currentCard.id);
+    if (!this.currentCard) {
+      return;
+    }
     if (this.settings.order) {
       this.currentCard.transCorrect++;
       if (!this.removableBeforeWasZero) this.currentCard.transCorrectRow = this.rowCounterAdd(this.currentCard.transCorrectRow);
