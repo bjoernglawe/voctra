@@ -10,6 +10,7 @@
     "build": "ng build",
     "build:web": "ionic build --prod",
     "build:android": "ionic capacitor build android --prod",
+    "build:icons": "cordova-res android --skip-config --copy",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -37,7 +38,7 @@
     "@ionic-native/file": "^5.36.0",
     "@ionic-native/globalization": "^5.36.0",
     "@ionic-native/social-sharing": "^5.36.0",
-    "@ionic/angular": "^5.9.2",
+    "@ionic/angular": "^5.9.3",
     "@ionic/storage-angular": "^3.0.6",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",

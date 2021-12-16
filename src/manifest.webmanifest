@@ -1,6 +1,7 @@
 {
-  "name": "app",
-  "short_name": "app",
+  "name": "Voctra",
+  "short_name": "Voctra",
+  "description": "Vocabulary Training App",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
