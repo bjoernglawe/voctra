@@ -1,4 +1,4 @@
-<ion-header translucent>
+<ion-header>
     <ion-toolbar>
         <ion-title>Modal Content</ion-title>
         <ion-buttons slot="end">
@@ -9,8 +9,8 @@
 <ion-content fullscreen>
     <ion-list>
         <ion-item *ngFor="let collection of allVocabulary">
-          <ion-label>{{collection.title}}</ion-label>
-          <ion-checkbox slot="end" [(ngModel)]="collection.selected"></ion-checkbox>
+            <ion-label>{{collection.title}}</ion-label>
+            <ion-checkbox slot="end" [(ngModel)]="collection.selected"></ion-checkbox>
         </ion-item>
-      </ion-list>
+    </ion-list>
 </ion-content>

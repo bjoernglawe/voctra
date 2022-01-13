@@ -342,8 +342,10 @@ export class VocabTestPage {
     const modal = await this.modalController.create({
       component: CollectionSelectorModalComponent,
       animated: true,
-      cssClass: 'small-modal',
       backdropDismiss: true,
+      swipeToClose: true,
+      initialBreakpoint: 0.7,
+      breakpoints: [0, 0.5, 0.7, 1],
       componentProps: {
         allVocabulary: vocabWithSelect,
       }
