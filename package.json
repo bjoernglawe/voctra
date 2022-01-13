@@ -13,9 +13,13 @@
     "build:icons": "cordova-res android --skip-config --copy",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "preinstall": "npx npm-force-resolutions"
   },
   "private": true,
+  "resolutions": {
+    "postcss": "^8.2.10"
+  },
   "dependencies": {
     "@angular/common": "~13.1.2",
     "@angular/core": "~13.1.2",
