@@ -21,43 +21,42 @@ export function createTranslateLoader(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
-  entryComponents: [],
-  imports: [
-    HttpClientModule,
-    BrowserModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: createTranslateLoader,
-        deps: [HttpClient],
-      },
-      defaultLanguage: 'de'
-    }),
-    IonicStorageModule.forRoot({
-      name: 'vocab-trainer',
-      driverOrder: [Drivers.IndexedDB, Drivers.LocalStorage]
-    }),
-    IonicModule.forRoot(),
-    AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-      // Register the ServiceWorker as soon as the app is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    }),
-  ],
-  providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    StorageService,
-    VocabManagerService,
-    ThemeService,
-    File,
-  ],
-  bootstrap: [
-    AppComponent,
-  ],
+    declarations: [
+        AppComponent,
+    ],
+    imports: [
+        HttpClientModule,
+        BrowserModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: createTranslateLoader,
+                deps: [HttpClient],
+            },
+            defaultLanguage: 'de'
+        }),
+        IonicStorageModule.forRoot({
+            name: 'vocab-trainer',
+            driverOrder: [Drivers.IndexedDB, Drivers.LocalStorage]
+        }),
+        IonicModule.forRoot(),
+        AppRoutingModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: environment.production,
+            // Register the ServiceWorker as soon as the app is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: 'registerWhenStable:30000'
+        }),
+    ],
+    providers: [
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+        StorageService,
+        VocabManagerService,
+        ThemeService,
+        File,
+    ],
+    bootstrap: [
+        AppComponent,
+    ]
 })
 export class AppModule { }
