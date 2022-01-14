@@ -56,9 +56,10 @@
   <!-- Collections -->
   <ng-container *ngIf="!showVocList && !showSearchResults">
     <ng-container *ngFor="let collection of collections">
-      <ion-card [style]="{'background-color': collection.color}" (click)="selectCollection(collection)"
+      <ion-card (click)="selectCollection(collection)"
         class="ion-activatable ripple-parent">
         <ion-ripple-effect></ion-ripple-effect>
+        <div class="collection-color" [style]="{'background-color': collection.color}"></div>
         <ion-card-header>
           <ion-card-subtitle>{{ collection.language }}
           </ion-card-subtitle>

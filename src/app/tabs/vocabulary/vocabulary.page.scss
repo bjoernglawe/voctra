@@ -1,3 +1,11 @@
+.collection-color {
+    position: absolute;
+    height: 100%;
+    width: 8px;
+    left: 0;
+    top: 0;
+}
+
 .vocab-item-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
