@@ -11,7 +11,7 @@
       <ion-button (click)="presentCollectionModal($event)">
         <ion-icon name="duplicate-outline"></ion-icon>
         <ion-badge color="light" mode="ios" style="transform: scale(0.8);">
-          {{ selectedVocabulary?.length }}
+          {{ selectedVocabulary?.length }} / {{ vocabulary?.length }}
         </ion-badge>
       </ion-button>
       <ion-button (click)="presentTestPopover($event)">
