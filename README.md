@@ -61,12 +61,12 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Vocabulary Trainer for Multi-Platform-Support. Android, iOS and Web.
+Vocabulary Trainer with Multi-Platform-Support for Android, iOS and Web build with [Ionic](https://ionic.io/) and [Angular](https://angular.io/).
 
 <div style="text-align: center">
-  <img src="resources/screenshots/screenshot-app-android.jpg" alt="Logo" height="120">
-  <img src="resources/screenshots/screenshot-app-iphone.jpg" alt="Logo" height="120">
-  <img src="resources/screenshots/screenshot-web.jpg" alt="Logo" height="120">
+  <img src="resources/screenshots/screenshot-app-android.jpg" alt="Logo" height="280">
+  <img src="resources/screenshots/screenshot-app-iphone.jpg" alt="Logo" height="280">
+  <img src="resources/screenshots/screenshot-web.jpg" alt="Logo" height="280">
 </div>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -158,7 +158,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See [`LICENSE`](https://github.com/bjoernglawe/voctra/blob/main/LICENSE) for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
