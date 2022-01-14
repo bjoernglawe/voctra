@@ -15,6 +15,10 @@
 
     <!-- Vocabulary-Collections -->
     <ion-buttons slot="primary" *ngIf="!showVocList">
+      <ion-button *ngIf="showSearch" (click)="showVocMore = !showVocMore">
+        <ion-icon slot="icon-only" *ngIf="!showVocMore" name="eye-outline"></ion-icon>
+        <ion-icon slot="icon-only" *ngIf="showVocMore" name="eye-off-outline"></ion-icon>
+      </ion-button>
       <ion-button (click)="toggleSearchbar()">
         <ion-icon *ngIf="!showSearch" slot="icon-only" name="search-outline"></ion-icon>
         <ion-icon *ngIf="showSearch" slot="icon-only" name="close-outline"></ion-icon>
@@ -44,12 +48,12 @@
     </ion-toolbar>
   </ion-header>
 
-  <ng-container *ngIf="showSearch">
+  <ng-container *ngIf="showSearch && !showVocList">
     <ion-searchbar class="searchbar" showCancelButton="focus" placeholder="{{ 'SEARCH' | translate }}"
       (ionChange)="setSearch($event)" (ionCancel)="closeSearchbar()" debounce="500"></ion-searchbar>
   </ng-container>
 
-  <!-- Vocabulary-Collections -->
+  <!-- Collections -->
   <ng-container *ngIf="!showVocList && !showSearchResults">
     <ng-container *ngFor="let collection of collections">
       <ion-card [style]="{'background-color': collection.color}" (click)="selectCollection(collection)"

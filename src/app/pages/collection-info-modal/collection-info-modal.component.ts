@@ -7,24 +7,24 @@ import { E_VocabCard, E_VocabCollection } from 'src/models/vocabulary.model';
 import { VocabManagerService } from 'src/services/vocab-manager.service';
 
 @Component({
-  selector: 'vocab-info-modal',
-  templateUrl: './vocab-info-modal.component.html',
-  styleUrls: ['./vocab-info-modal.component.scss']
+  selector: 'collection-info-modal',
+  templateUrl: './collection-info-modal.component.html',
+  styleUrls: ['./collection-info-modal.component.scss']
 })
-export class VocabInfoModalComponent implements OnInit {
+export class CollectionInfoModalComponent implements OnInit {
 
   private ngUnsubscribe: Subject<void> = new Subject();
 
-  @Input('vocab') vocab: E_VocabCard = undefined;
   @Input('collection') collection: E_VocabCollection = undefined;
 
   public editMode: boolean = false;
 
   public vocabFormGroup: FormGroup = new FormGroup({
-    vocWord: new FormControl(this.vocab?.word, [Validators.required]),
-    vocPron: new FormControl(this.vocab?.pronunciation),
-    vocTrans: new FormControl(this.vocab?.translation, [Validators.required]),
-    vocDesc: new FormControl(this.vocab?.description),
+    collTitle: new FormControl(undefined, [Validators.required]),
+    collLanguage: new FormControl(undefined, [Validators.required]),
+    collTranslateLang: new FormControl(undefined, [Validators.required]),
+    collDescription: new FormControl(),
+    collColor: new FormControl(),
   })
 
   constructor(
@@ -37,7 +37,6 @@ export class VocabInfoModalComponent implements OnInit {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((collections: E_VocabCollection[]) => {
         this.collection = collections.find(coll => coll.id == this.collection.id);
-        this.vocab = this.collection.vocabulary.find(voc => voc.id == this.vocab.id);
       });
   }
 
@@ -54,35 +53,38 @@ export class VocabInfoModalComponent implements OnInit {
   }
 
   public editVocab() {
-    this.vocabFormGroup.get('vocWord').setValue(this.vocab.word);
-    this.vocabFormGroup.get('vocPron').setValue(this.vocab.pronunciation);
-    this.vocabFormGroup.get('vocTrans').setValue(this.vocab.translation);
-    this.vocabFormGroup.get('vocDesc').setValue(this.vocab.description);
+    this.vocabFormGroup.get('collTitle').setValue(this.collection.title);
+    this.vocabFormGroup.get('collLanguage').setValue(this.collection.language);
+    this.vocabFormGroup.get('collTranslateLang').setValue(this.collection.translateLang);
+    this.vocabFormGroup.get('collDescription').setValue(this.collection.description);
+    this.vocabFormGroup.get('collColor').setValue(this.collection.color);
     this.editMode = true;
   }
 
   public saveChanges() {
     if (
-      this.vocabFormGroup.get('vocWord').invalid ||
-      this.vocabFormGroup.get('vocTrans').invalid
+      this.vocabFormGroup.get('collTitle').invalid ||
+      this.vocabFormGroup.get('collLanguage').invalid ||
+      this.vocabFormGroup.get('collTranslateLang').invalid
     ) {
       return;
     }
 
-    this.vocab.word = this.vocabFormGroup.get('vocWord').value;
-    this.vocab.translation = this.vocabFormGroup.get('vocTrans').value;
-    this.vocab.pronunciation = this.vocabFormGroup.get('vocPron').value;
-    this.vocab.description = this.vocabFormGroup.get('vocDesc').value;
+    this.collection.title = this.vocabFormGroup.get('collTitle').value;
+    this.collection.language = this.vocabFormGroup.get('collLanguage').value;
+    this.collection.translateLang = this.vocabFormGroup.get('collTranslateLang').value;
+    this.collection.description = this.vocabFormGroup.get('collDescription').value;
+    this.collection.color = this.vocabFormGroup.get('collColor').value;
 
     this.vocabService.saveVocabulary();
     this.editMode = false;
-    this.toastSave(this.vocab.word, this.vocab.translation);
+    this.toastSave(this.collection.title, this.collection.language);
   }
 
-  private async toastSave(word: string, translation: string) {
+  private async toastSave(title: string, language: string) {
     const toast = await this.toastController.create({
       header: this.translateService.instant('SAVED_CHANGES'),
-      message: word + ' - ' + translation,
+      message: title + ' - ' + language,
       color: 'success',
       position: 'bottom',
       duration: 2000,

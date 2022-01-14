@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FileSharer } from '@byteowls/capacitor-filesharer';
 import { Capacitor } from '@capacitor/core';
-import { PopoverController, ToastController } from '@ionic/angular';
+import { ModalController, PopoverController, ToastController } from '@ionic/angular';
+import { CollectionInfoModalComponent } from 'src/app/pages/collection-info-modal/collection-info-modal.component';
 import { E_VocabCollection } from 'src/models/vocabulary.model';
 
 @Component({
@@ -16,6 +17,7 @@ export class PopoverCollectionComponent implements OnInit {
   constructor(
     private popover: PopoverController,
     private toastController: ToastController,
+    private modalController: ModalController,
   ) { }
 
   ngOnInit(): void {
@@ -27,6 +29,18 @@ export class PopoverCollectionComponent implements OnInit {
 
   public deleteCollection() {
     this.popover.dismiss("delete");
+  }
+
+  public async editCollection() {
+    if (this.collection) {
+      const modal = await this.modalController.create({
+        component: CollectionInfoModalComponent,
+        componentProps: {
+          collection: this.collection,
+        }
+      });
+      return await modal.present();
+    }
   }
 
   public async downloadCollection() {

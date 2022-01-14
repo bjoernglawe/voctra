@@ -1,6 +1,6 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { CollectionInfoModalModule } from 'src/app/pages/collection-info-modal/collection-info-modal.module';
 import { SharedModule } from '../../shared.module';
 import { PopoverCollectionComponent } from './popover-collection.component';
 
@@ -9,6 +9,7 @@ import { PopoverCollectionComponent } from './popover-collection.component';
   imports: [
     IonicModule,
     SharedModule,
+    CollectionInfoModalModule,
   ],
   declarations: [
     PopoverCollectionComponent

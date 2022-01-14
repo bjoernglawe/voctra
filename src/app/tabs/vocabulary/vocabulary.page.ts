@@ -41,6 +41,9 @@ export class VocabularyPage {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((respCollections: E_VocabCollection[]) => {
         this.collections = respCollections;
+        if (this.selectedCollection) {
+          this.selectedCollection = this.collections.find(coll => coll.id == this.selectedCollection.id);
+        }
       });
     this.vocabService.loadVocabulary();
     this.platform.backButton.subscribeWithPriority(10, () => {
