@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FileSharer } from '@byteowls/capacitor-filesharer';
 import { Capacitor } from '@capacitor/core';
 import { PopoverController, ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { E_VocabCollection } from 'src/models/vocabulary.model';
 import { VocabManagerService } from 'src/services/vocab-manager.service';
 
@@ -18,6 +19,7 @@ export class PopoverVocabularyComponent implements OnInit {
     private popover: PopoverController,
     private vocabService: VocabManagerService,
     private toastController: ToastController,
+    private translateService: TranslateService,
   ) { }
 
   ngOnInit(): void {
@@ -42,6 +44,14 @@ export class PopoverVocabularyComponent implements OnInit {
               this.vocabService.addCollection(coll);
             }
           });
+          this.toastController.create({
+            message: this.translateService.instant('ADD_VOCABULARY'),
+            color: 'success',
+            duration: 2000,
+          }).then((toast) => {
+            toast.present();
+          });
+          this.vocabService.loadVocabulary();
           this.popover.dismiss()
         }
         if (json.id) {
@@ -49,6 +59,14 @@ export class PopoverVocabularyComponent implements OnInit {
           let collection: E_VocabCollection = json;
           if (collection.id && collection.title && collection.language && collection.date && collection.translateLang && collection.vocabulary) {
             this.vocabService.addCollection(collection);
+            this.toastController.create({
+              message: this.translateService.instant('ADD_VOCABULARY'),
+              color: 'success',
+              duration: 2000,
+            }).then((toast) => {
+              toast.present();
+            });
+            this.vocabService.loadVocabulary();
             this.popover.dismiss();
           }
         }

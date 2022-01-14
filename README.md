@@ -63,9 +63,11 @@
 
 Vocabulary Trainer for Multi-Platform-Support. Android, iOS and Web.
 
-<img src="resources/screenshots/screenshot-app-android.jpg" alt="Logo" height="120">
-<img src="resources/screenshots/screenshot-app-iphone.jpg" alt="Logo" height="120">
-<img src="resources/screenshots/screenshot-web.jpg" alt="Logo" height="120">
+<div style="text-align: center">
+  <img src="resources/screenshots/screenshot-app-android.jpg" alt="Logo" height="120">
+  <img src="resources/screenshots/screenshot-app-iphone.jpg" alt="Logo" height="120">
+  <img src="resources/screenshots/screenshot-web.jpg" alt="Logo" height="120">
+</div>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
