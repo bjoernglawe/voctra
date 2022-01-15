@@ -6,17 +6,14 @@ import { E_VocabCollection } from 'src/models/vocabulary.model';
 import { TestOptionsService } from 'src/services/test-options.service';
 
 @Component({
-  selector: 'collection-selector-modal',
-  templateUrl: './collection-selector-modal.component.html',
-  styleUrls: ['./collection-selector-modal.component.scss']
+  selector: 'test-options-modal',
+  templateUrl: './test-options-modal.component.html',
+  styleUrls: ['./test-options-modal.component.scss']
 })
-export class CollectionSelectorModalComponent implements OnInit {
-
+export class TestOptionsModalComponent implements OnInit {
   private ngUnsubscribe: Subject<void> = new Subject();
 
-  @Input('vocabulary') vocabulary: E_VocabCollection[] = [];
-  public selectVocab: (E_VocabCollection & { selected?: boolean })[] = [];
-  private options: E_TestOptions = new E_TestOptions();
+  public options: E_TestOptions = new E_TestOptions();
 
   constructor(
     private modalController: ModalController,
@@ -26,16 +23,11 @@ export class CollectionSelectorModalComponent implements OnInit {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((res: E_TestOptions) => {
         this.options = res;
-        this.selectVocab = this.vocabulary.map((coll) => {
-          let mapColl: (E_VocabCollection & { selected?: boolean }) = coll;
-          mapColl.selected = !res.selectedCollIds.find(id => id == coll.id);
-          return mapColl;
-        });
-      });
-    optionsService.loadOptions();
+      })
   }
 
   ngOnInit(): void {
+    this.optionsService.loadOptions();
   }
 
   ngOnDestroy(): void {
@@ -44,11 +36,7 @@ export class CollectionSelectorModalComponent implements OnInit {
   }
 
   public saveModal(): void {
-    this.options.selectedCollIds =
-      this.selectVocab
-        .filter(coll => !coll.selected)
-        .map(coll => coll.id);
     this.optionsService.saveOptions();
-    this.modalController.dismiss();
+    this.modalController.dismiss({});
   }
 }

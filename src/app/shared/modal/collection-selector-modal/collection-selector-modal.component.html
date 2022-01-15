@@ -2,13 +2,14 @@
     <ion-toolbar>
         <ion-title> {{ 'COLLECTIONS' | translate }} </ion-title>
         <ion-buttons slot="end">
-            <ion-button (click)="dismissModal()">{{ 'SAVE' | translate }}</ion-button>
+            <ion-button (click)="saveModal()">{{ 'SAVE' | translate }}</ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 <ion-content fullscreen>
     <ion-list>
-        <ion-item *ngFor="let collection of allVocabulary">
+        <ion-item *ngFor="let collection of selectVocab" style="--border-color: {{collection.color}}">
+            <!-- <div class="collection-color" [style]="{'background-color': collection.color}"></div> -->
             <ion-label>{{collection.title}}</ion-label>
             <ion-checkbox slot="end" [(ngModel)]="collection.selected"></ion-checkbox>
         </ion-item>

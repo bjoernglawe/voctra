@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title> {{ 'OPTIONS' | translate }} </ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="saveModal()">{{ 'SAVE' | translate }}</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+    <ion-list>
+        <ion-item>
+            <ion-label>
+                {{ 'PRONUNCIATION' | translate }}
+            </ion-label>
+            <ion-toggle [(ngModel)]="options.showPron"></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label>
+                {{ 'DESCRIPTION' | translate }}
+            </ion-label>
+            <ion-toggle [(ngModel)]="options.showDesc"></ion-toggle>
+        </ion-item>
+    </ion-list>
+</ion-content>

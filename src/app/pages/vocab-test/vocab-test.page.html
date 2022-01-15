@@ -14,8 +14,8 @@
           {{ selectedVocabulary?.length }} / {{ vocabulary?.length }}
         </ion-badge>
       </ion-button>
-      <ion-button (click)="presentTestPopover($event)">
-        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+      <ion-button (click)="presentTestOptions($event)">
+        <ion-icon name="options-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -26,20 +26,20 @@
     <!-- LANGUAGE ORDER -->
     <ion-item class="test-order-item" button (click)="changeOrder()" lines="none">
       <div class="test-order">
-        <div *ngIf="settings.order">{{ 'WORD' | translate }} <div class="language-word">{{
+        <div *ngIf="options.order">{{ 'WORD' | translate }} <div class="language-word">{{
             getCardLanguage(currentCard)
             }}</div>
         </div>
-        <div *ngIf="!settings.order">{{ 'TRANSLATION' | translate }} <div class="language-word">{{
+        <div *ngIf="!options.order">{{ 'TRANSLATION' | translate }} <div class="language-word">{{
             getCardTransLanguage(currentCard) }}</div>
         </div>
         <div class="test-order-symbol">
           <ion-icon name="swap-horizontal-outline"></ion-icon>
         </div>
-        <div *ngIf="settings.order">{{ 'TRANSLATION' | translate }} <div class="language-word">{{
+        <div *ngIf="options.order">{{ 'TRANSLATION' | translate }} <div class="language-word">{{
             getCardTransLanguage(currentCard) }}</div>
         </div>
-        <div *ngIf="!settings.order">{{ 'WORD' | translate }} <div class="language-word">{{
+        <div *ngIf="!options.order">{{ 'WORD' | translate }} <div class="language-word">{{
             getCardLanguage(currentCard)
             }}</div>
         </div>
@@ -56,14 +56,14 @@
               <p class="correct-word" *ngIf="showWrong || showSuccess">{{currentCard.word}}</p>
             </ion-input>
             <ion-input class="voc-input voc-pron-input"
-              [class.visibilityHide]="!settings.showPron && !(showSuccess || showWrong)" formControlName="vocPron"
+              [class.visibilityHide]="!options.showPron && !(showSuccess || showWrong)" formControlName="vocPron"
               [disabled]="true">
             </ion-input>
             <ion-input #vocTrans class="voc-input voc-trans-input" [class.hideCheck]="showWrong || showSuccess"
               formControlName="vocTrans">
               <p class="correct-translation" *ngIf="showWrong || showSuccess">{{currentCard.translation}}</p>
             </ion-input>
-            <ion-textarea [class.visibilityHide]="!settings.showDesc && !(showSuccess || showWrong)"
+            <ion-textarea [class.visibilityHide]="!options.showDesc && !(showSuccess || showWrong)"
               class="voc-input voc-desc-input" formControlName="vocDesc" type="textarea" [disabled]="true">
             </ion-textarea>
           </ion-card-content>
@@ -92,12 +92,12 @@
 <ion-footer>
   <!-- Correct-Bar -->
   <ng-container *ngIf="currentCard">
-    <div class="correct-row" *ngIf="settings.order"
-      [style]="{'grid-template-columns': 'repeat(' + settings.rowSize + ', 1fr)'}">
+    <div class="correct-row" *ngIf="options.order"
+      [style]="{'grid-template-columns': 'repeat(' + options.rowSize + ', 1fr)'}">
       <div class="correct-row-success" *ngFor="let item of getArrayOfCorrect(currentCard.transCorrectRow)"></div>
     </div>
-    <div class="correct-row" *ngIf="!settings.order"
-      [style]="{'grid-template-columns': 'repeat(' + settings.rowSize + ', 1fr)'}">
+    <div class="correct-row" *ngIf="!options.order"
+      [style]="{'grid-template-columns': 'repeat(' + options.rowSize + ', 1fr)'}">
       <div class="correct-row-success" *ngFor="let item of getArrayOfCorrect(currentCard.wordCorrectRow)"></div>
     </div>
   </ng-container>

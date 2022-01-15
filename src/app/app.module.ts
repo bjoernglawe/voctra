@@ -10,6 +10,7 @@ import { IonicStorageModule } from '@ionic/storage-angular';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { StorageService } from 'src/services/storage.service';
+import { TestOptionsService } from 'src/services/test-options.service';
 import { ThemeService } from 'src/services/theme.service';
 import { VocabManagerService } from 'src/services/vocab-manager.service';
 import { environment } from '../environments/environment';
@@ -52,6 +53,7 @@ export function createTranslateLoader(http: HttpClient) {
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         StorageService,
         VocabManagerService,
+        TestOptionsService,
         ThemeService,
         File,
     ],

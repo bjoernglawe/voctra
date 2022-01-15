@@ -27,7 +27,7 @@ export class ThemeService {
             .pipe(takeUntil(this.ngUnsubscribe), takeUntil(unsubStorage))
             .subscribe((value) => {
                 if (value) {
-                    this.storageService.get(environment.themeKey).then(theme => {
+                    this.storageService.get(environment.themeStorageKey).then(theme => {
                         if (theme) {
                             this.setTheme(theme);
                         }
@@ -70,7 +70,7 @@ export class ThemeService {
     /*** GETTER & SETTER ***/
     private set currentTheme(value: E_Theme) {
         this._currentTheme = value;
-        this.storageService.set(environment.themeKey, value);
+        this.storageService.set(environment.themeStorageKey, value);
         this.themeSubject.next(value);
     }
 

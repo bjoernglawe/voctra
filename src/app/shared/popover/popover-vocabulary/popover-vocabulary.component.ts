@@ -25,10 +25,6 @@ export class PopoverVocabularyComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  ClosePopover() {
-    this.popover.dismiss();
-  }
-
   public uploadCollection(ev: any) {
     let file = ev.target.files[0];
     if (file) {

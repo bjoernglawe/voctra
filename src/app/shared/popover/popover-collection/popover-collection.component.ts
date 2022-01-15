@@ -41,6 +41,7 @@ export class PopoverCollectionComponent implements OnInit {
       });
       return await modal.present();
     }
+    this.popover.dismiss();
   }
 
   public async downloadCollection() {

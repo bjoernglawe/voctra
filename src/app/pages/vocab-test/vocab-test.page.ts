@@ -4,16 +4,19 @@ import { ModalController, NavController, Platform, PopoverController } from '@io
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { CollectionSelectorModalComponent } from 'src/app/shared/modal/collection-selector-modal/collection-selector-modal.component';
+import { TestOptionsModalComponent } from 'src/app/shared/modal/test-options-modal/test-options-modal.component';
 import { PopoverTestComponent } from 'src/app/shared/popover/popover-test/popover-test.component';
+import { E_TestOptions } from 'src/models/test-options.model';
 import { E_VocabCard, E_VocabCollection } from 'src/models/vocabulary.model';
+import { TestOptionsService } from 'src/services/test-options.service';
 import { VocabManagerService } from 'src/services/vocab-manager.service';
 
 /**
  * card initialization
  * function order:
  *  1. filterSelectedCollections()
- *  2. initVocabCards
- *  3. selectNextCard
+ *  2. initVocabCards()
+ *  3. selectNextCard()
  */
 
 @Component({
@@ -26,7 +29,6 @@ export class VocabTestPage {
   private ngUnsubscribe: Subject<void> = new Subject();
 
   public vocabulary: E_VocabCollection[] = [];
-  public selectedCollectionIds: string[] = [];
   public selectedVocabulary: E_VocabCollection[] = [];
   public vocabCards: E_VocabCard[] = [];
   public currentCard: E_VocabCard;
@@ -37,20 +39,10 @@ export class VocabTestPage {
   @ViewChild('vocWord') vocWord;
   @ViewChild('vocTrans') vocTrans;
 
-  // cash
+  // cache
   private removableBeforeWasZero: boolean = false;
 
-  public settings: {
-    showPron: boolean,
-    showDesc: boolean,
-    order: boolean,
-    rowSize: number,
-  } = {
-      showPron: false,
-      showDesc: false,
-      order: true,       // true: Word (disabled) -> Translation (input)
-      rowSize: 10,
-    }
+  public options: E_TestOptions = new E_TestOptions();
 
   public testFormGroup = new FormGroup({
     vocWord: new FormControl(),
@@ -61,19 +53,23 @@ export class VocabTestPage {
 
   constructor(
     private vocabService: VocabManagerService,
-    private popoverController: PopoverController,
     private platform: Platform,
     private navCtrl: NavController,
     private modalController: ModalController,
+    private optionsService: TestOptionsService,
   ) {
+    this.optionsService.getOptions()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((res: E_TestOptions) => {
+        this.options = res;
+        this.filterSelectedCollections();
+      });
+
     // vocabulary updates
     this.vocabService.getAllVocabulary()
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((res: E_VocabCollection[]) => {
         this.vocabulary = res;
-        if (this.selectedCollectionIds.length <= 0) {
-          this.selectedCollectionIds = this.vocabulary.map(coll => coll.id);
-        }
         this.filterSelectedCollections();
       });
 
@@ -84,6 +80,7 @@ export class VocabTestPage {
   }
 
   ngOnInit() {
+    this.optionsService.loadOptions();
     this.vocabService.loadVocabulary();
   }
 
@@ -98,7 +95,7 @@ export class VocabTestPage {
   private filterSelectedCollections() {
     this.selectedVocabulary = [];
     this.vocabulary.forEach(coll => {
-      if (this.selectedCollectionIds.find(id => id == coll.id)) {
+      if (!this.options.selectedCollIds.find(id => id == coll.id)) {
         this.selectedVocabulary.push(coll);
       }
     })
@@ -141,7 +138,7 @@ export class VocabTestPage {
     }
     this.testFormGroup.get('vocPron').setValue(this.currentCard.pronunciation);
     this.testFormGroup.get('vocDesc').setValue(this.currentCard.description);
-    if (this.settings.order) {
+    if (this.options.order) {
       this.testFormGroup.get('vocWord').setValue(this.currentCard.word);
       this.testFormGroup.get('vocWord').disable();
       this.testFormGroup.get('vocTrans').setValue(null);
@@ -166,7 +163,7 @@ export class VocabTestPage {
    * @returns increased counter
    */
   private rowCounterAdd(counter: number): number {
-    if (counter < this.settings.rowSize) {
+    if (counter < this.options.rowSize) {
       return (counter += 1);
     }
     return counter;
@@ -194,7 +191,7 @@ export class VocabTestPage {
    *  - remove spaces at end
    */
   public checkTest() {
-    if (this.settings.order) { // TRANSLATION CHECK
+    if (this.options.order) { // TRANSLATION CHECK
       if (this.testFormGroup.get('vocTrans').value &&
         (this.testFormGroup.get('vocTrans').value as string).toLowerCase().replace(/\s+$/, '') == this.currentCard.translation.toLowerCase()) {
         this.currentCard.transCorrect++;
@@ -236,7 +233,7 @@ export class VocabTestPage {
     if (!this.currentCard) {
       return;
     }
-    if (this.settings.order) {
+    if (this.options.order) {
       this.currentCard.transCorrect++;
       if (!this.removableBeforeWasZero) this.currentCard.transCorrectRow = this.rowCounterAdd(this.currentCard.transCorrectRow);
       this.currentCard.transCorrectRow = this.rowCounterAdd(this.currentCard.transCorrectRow);
@@ -260,7 +257,7 @@ export class VocabTestPage {
    * translation - word
    */
   public changeOrder() {
-    this.settings.order = !this.settings.order;
+    this.options.order = !this.options.order;
     this.setCardContent();
   }
 
@@ -311,23 +308,18 @@ export class VocabTestPage {
 
   /***** MODALS & POPOVER *****/
 
-  /**
-   * Option menu popover
-   * @param {Event} ev
-   */
-  public async presentTestPopover(ev: any) {
-    const popover = await this.popoverController.create({
-      component: PopoverTestComponent,
-      cssClass: '',
-      event: ev,
-      showBackdrop: true,
-      translucent: true,
-      keyboardClose: true,
-      componentProps: { settings: this.settings },
+  public async presentTestOptions(ev: any) {
+    const modal = await this.modalController.create({
+      component: TestOptionsModalComponent,
+      animated: true,
+      backdropDismiss: true,
+      swipeToClose: true,
+      initialBreakpoint: 0.7,
+      breakpoints: [0, 0.5, 0.7, 1],
+      componentProps: {}
     });
-    await popover.present();
-
-    const { data } = await popover.onDidDismiss();
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
   }
 
   /**
@@ -335,10 +327,6 @@ export class VocabTestPage {
    * @param {Event} event 
    */
   public async presentCollectionModal(event: Event) {
-    let vocabWithSelect: (E_VocabCollection & { selected?: boolean })[] = this.vocabulary;
-    vocabWithSelect.forEach(coll => {
-      coll.selected = this.selectedVocabulary.find(selColl => selColl.id == coll.id) != undefined;
-    });
     const modal = await this.modalController.create({
       component: CollectionSelectorModalComponent,
       animated: true,
@@ -346,15 +334,10 @@ export class VocabTestPage {
       swipeToClose: true,
       initialBreakpoint: 0.7,
       breakpoints: [0, 0.5, 0.7, 1],
-      componentProps: {
-        allVocabulary: vocabWithSelect,
+      componentProps: { 
+        vocabulary: this.vocabulary,
       }
     });
     await modal.present();
-    const { data } = await modal.onWillDismiss();
-    if (data?.saved) {
-      this.selectedCollectionIds = data.selectedVocabulary as string[];
-      this.filterSelectedCollections();
-    }
   }
 }
